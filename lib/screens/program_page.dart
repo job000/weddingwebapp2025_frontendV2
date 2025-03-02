@@ -1,7 +1,10 @@
+//Ignore import of 'package:weddingwebapp2025/utils/flying_doves_animation.dart' because it is not used.
+
 import 'package:flutter/material.dart';
 import 'package:weddingwebapp2025/models/timeline_event.dart';
 import 'package:weddingwebapp2025/utils/app_theme.dart';
 import 'package:weddingwebapp2025/widgets/navigation_menu.dart';
+//import 'package:weddingwebapp2025/utils/flying_doves_animation.dart';
 
 class ProgramPage extends StatefulWidget {
   const ProgramPage({super.key});
@@ -152,6 +155,16 @@ class _ProgramPageState extends State<ProgramPage>
               ],
             ),
           ),
+          // Legg til de flygende duene
+          /*TODO: kommentere ut for å legge til de flygende duene
+          Positioned.fill(
+            child: FlyingDovesAnimation(
+              numberOfDoves: 5,
+              doveColor: Colors.white.withOpacity(0.8),
+            ),
+          ),
+          */
+
           const Positioned(
             left: 0,
             right: 0,
@@ -191,7 +204,7 @@ class _ProgramPageState extends State<ProgramPage>
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
                 child: Image.network(
                   dayTitle.contains('Fredag')
-                      ? 'https://images.unsplash.com/photo-1522673607200-17b5ed6fea97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80' // Nytt bilde for fredag
+                      ? 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80' // Nytt bilde for fredag
                       : 'https://images.unsplash.com/photo-1522413452208-996ff3f3e740?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80', // Nytt bilde for lørdag
                   height: 160, // Økt høyde for bildene
                   width: double.infinity,
