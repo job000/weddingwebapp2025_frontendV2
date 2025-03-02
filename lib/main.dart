@@ -26,6 +26,7 @@ class WeddingApp extends StatelessWidget {
   }
 }
 
+// for render endring
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
