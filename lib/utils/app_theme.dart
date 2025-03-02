@@ -1,12 +1,20 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // Elegant bryllups-fargepalett
-  static const primaryGreen = Color(0xFF1B4D3E); // Dyp elegant grønn
-  static const secondaryGreen = Color(0xFF7AA095); // Myk sag grønn
-  static const accentGold = Color(0xFFD4AF37); // Gull aksent
-  static const surfaceLight = Color(0xFFF8F9F6); // Kremhvit
-  static final backgroundGreen = const Color(0xFF2E5D4F);
+  // Improved palette
+  static const primaryGreen =
+      Color(0xFF184A3B); // Slightly deeper, more elegant green
+  static const secondaryGreen =
+      Color(0xFF5D9B8B); // Brighter, more vibrant sage
+  static const tertiaryGreen =
+      Color(0xFFAACFC2); // Light sage for subtler accents
+  static const accentGold = Color(0xFFD4B254); // Warmer gold accent
+  static const accentCream = Color(0xFFF9F4E8); // Warmer cream for surfaces
+  static const surfaceLight = Color(0xFFF8F9F6); // Keep original cream white
+  static final backgroundGreen =
+      Color(0xFF2A5648); // Slightly adjusted for depth
 
   // Design tokens
   static final elegantGradient = LinearGradient(

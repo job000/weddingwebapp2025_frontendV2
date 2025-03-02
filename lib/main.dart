@@ -27,7 +27,7 @@ class WeddingApp extends StatelessWidget {
 }
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
         child: Center(
           child: Text(
-            'Vårt Bryllup 2025',
+            'Frida & JM sin Bryllup 2025',
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,
