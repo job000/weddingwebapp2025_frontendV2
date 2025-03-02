@@ -9,7 +9,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   late ScrollController _scrollController;
   late AnimationController _animationController;
   late List<Animation<double>> _cardAnimations;
@@ -61,8 +62,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 collapsedHeight: kToolbarHeight,
                 flexibleSpace: LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
-                    final double percent = (constraints.maxHeight - kToolbarHeight) / (MediaQuery.of(context).size.height * 0.6 - kToolbarHeight);
-                    
+                    final double percent =
+                        (constraints.maxHeight - kToolbarHeight) /
+                            (MediaQuery.of(context).size.height * 0.6 -
+                                kToolbarHeight);
+
                     return FlexibleSpaceBar(
                       stretchModes: const [
                         StretchMode.zoomBackground,
@@ -71,7 +75,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       titlePadding: EdgeInsets.zero,
                       title: Container(
                         width: double.infinity,
-                        color: percent < 0.5 
+                        color: percent < 0.5
                             ? Colors.black.withOpacity(0.3)
                             : Colors.transparent,
                         child: Container(
@@ -101,15 +105,21 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       background: Stack(
                         fit: StackFit.expand,
                         children: [
-                          Image.asset(
-                            'assets/images/wedding_background.jpg',
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Image.network(
-                                'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2274&q=80',
-                                fit: BoxFit.cover,
-                              );
-                            },
+                          ColoredBox(
+                            color: AppTheme.primaryGreen.withOpacity(0.8),
+                            child: Image.network(
+                              'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2274&q=80',
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return const Center(
+                                  child: Icon(
+                                    Icons.favorite,
+                                    color: Colors.white,
+                                    size: 64,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                           DecoratedBox(
                             decoration: BoxDecoration(
@@ -202,19 +212,19 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             Text(
               'Vi gifter oss!',
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                fontWeight: FontWeight.w200,
-                letterSpacing: -0.5,
-              ),
+                    fontWeight: FontWeight.w200,
+                    letterSpacing: -0.5,
+                  ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
             Text(
               'Det er med stor glede vi inviterer deg til å feire vår store dag sammen med oss.',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Colors.black87,
-                letterSpacing: 0.3,
-                height: 1.5,
-              ),
+                    color: Colors.black87,
+                    letterSpacing: 0.3,
+                    height: 1.5,
+                  ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -256,27 +266,27 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               Text(
                 title,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.w300,
-                  letterSpacing: 0.5,
-                  color: AppTheme.primaryGreen,
-                ),
+                      fontWeight: FontWeight.w300,
+                      letterSpacing: 0.5,
+                      color: AppTheme.primaryGreen,
+                    ),
               ),
               const SizedBox(height: 16),
               Text(
                 date,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w400,
-                  color: AppTheme.secondaryGreen,
-                  letterSpacing: 0.3,
-                ),
+                      fontWeight: FontWeight.w400,
+                      color: AppTheme.secondaryGreen,
+                      letterSpacing: 0.3,
+                    ),
               ),
               const SizedBox(height: 12),
               Text(
                 description,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Colors.black54,
-                  height: 1.5,
-                ),
+                      color: Colors.black54,
+                      height: 1.5,
+                    ),
                 textAlign: TextAlign.center,
               ),
             ],

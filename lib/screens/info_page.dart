@@ -45,64 +45,79 @@ class _InfoPageState extends State<InfoPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        title: const Text('Praktisk Info'),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
       body: Stack(
         children: [
           Container(
             decoration: BoxDecoration(gradient: AppTheme.backgroundGradient),
-            child: SingleChildScrollView(
+            child: CustomScrollView(
               physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                    24, 100, 24, 60), // Justert bottom padding
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Alt du trenger å vite',
-                      style:
-                          Theme.of(context).textTheme.displayMedium?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w300,
-                              ),
+              slivers: [
+                SliverAppBar(
+                  pinned: true,
+                  stretch: true,
+                  expandedHeight: 200,
+                  backgroundColor: Colors.transparent,
+                  flexibleSpace: FlexibleSpaceBar(
+                    title: const Text('Praktisk Info'),
+                    background: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            AppTheme.primaryGreen.withOpacity(0.7),
+                            Colors.transparent,
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
                     ),
-                    const SizedBox(height: 40),
-                    _buildAnimatedInfoCard(
-                      context,
-                      'Overnatting',
-                      'Vi har reservert rom på Scandic Havet for gjester. Bruk koden "BRYLLUP2025" ved bestilling for å få rabatt.',
-                      Icons.hotel_outlined,
-                      _cardAnimations[0],
-                    ),
-                    _buildAnimatedInfoCard(
-                      context,
-                      'Dresscode',
-                      'Antrekk: Pent. Menn kan bruke dress eller pent antrekk, damer kjole eller pent antrekk.',
-                      Icons.checkroom_outlined,
-                      _cardAnimations[1],
-                    ),
-                    _buildAnimatedInfoCard(
-                      context,
-                      'Gaver',
-                      'Deres tilstedeværelse er den største gaven for oss. Om dere likevel ønsker å gi en gave, setter vi pris på et bidrag til vår bryllupsreise.',
-                      Icons.card_giftcard_outlined,
-                      _cardAnimations[2],
-                    ),
-                    _buildAnimatedInfoCard(
-                      context,
-                      'Allergier',
-                      'Vennligst gi oss beskjed om matallergier eller spesielle diettbehov når du svarer på invitasjonen.',
-                      Icons.restaurant_outlined,
-                      _cardAnimations[4],
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(24, 20, 24, 100),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate([
+                      Text(
+                        'Alt du trenger å vite',
+                        style:
+                            Theme.of(context).textTheme.displayMedium?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                      ),
+                      const SizedBox(height: 40),
+                      _buildAnimatedInfoCard(
+                        context,
+                        'Overnatting',
+                        'Vi har reservert rom på Scandic Havet for gjester. Bruk koden "BRYLLUP2025" ved bestilling for å få rabatt.',
+                        Icons.hotel_outlined,
+                        _cardAnimations[0],
+                      ),
+                      _buildAnimatedInfoCard(
+                        context,
+                        'Dresscode',
+                        'Antrekk: Pent. Menn kan bruke dress eller pent antrekk, damer kjole eller pent antrekk.',
+                        Icons.checkroom_outlined,
+                        _cardAnimations[1],
+                      ),
+                      _buildAnimatedInfoCard(
+                        context,
+                        'Gaver',
+                        'Deres tilstedeværelse er den største gaven for oss. Om dere likevel ønsker å gi en gave, setter vi pris på et bidrag til vår bryllupsreise.',
+                        Icons.card_giftcard_outlined,
+                        _cardAnimations[2],
+                      ),
+                      _buildAnimatedInfoCard(
+                        context,
+                        'Allergier',
+                        'Vennligst gi oss beskjed om matallergier eller spesielle diettbehov når du svarer på invitasjonen.',
+                        Icons.restaurant_outlined,
+                        _cardAnimations[4],
+                      ),
+                    ]),
+                  ),
+                ),
+              ],
             ),
           ),
           const Positioned(
