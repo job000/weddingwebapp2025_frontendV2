@@ -59,7 +59,7 @@ class _InfoPageState extends State<InfoPage>
               physics: const BouncingScrollPhysics(),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(
-                    24, 100, 24, 100), // Added bottom padding
+                    24, 100, 24, 60), // Justert bottom padding
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -92,13 +92,6 @@ class _InfoPageState extends State<InfoPage>
                       'Deres tilstedeværelse er den største gaven for oss. Om dere likevel ønsker å gi en gave, setter vi pris på et bidrag til vår bryllupsreise.',
                       Icons.card_giftcard_outlined,
                       _cardAnimations[2],
-                    ),
-                    _buildAnimatedInfoCard(
-                      context,
-                      'Barn',
-                      'Barn er hjertelig velkomne i bryllupet. Vi vil ha aktiviteter for de minste.',
-                      Icons.child_care_outlined,
-                      _cardAnimations[3],
                     ),
                     _buildAnimatedInfoCard(
                       context,
