@@ -9,7 +9,8 @@ class LocationPage extends StatefulWidget {
   State<LocationPage> createState() => _LocationPageState();
 }
 
-class _LocationPageState extends State<LocationPage> with SingleTickerProviderStateMixin {
+class _LocationPageState extends State<LocationPage>
+    with SingleTickerProviderStateMixin {
   late ScrollController _scrollController;
   late AnimationController _controller;
   late List<Animation<double>> _animations;
@@ -77,7 +78,8 @@ class _LocationPageState extends State<LocationPage> with SingleTickerProviderSt
                   ),
                 ),
                 SliverPadding(
-                  padding: const EdgeInsets.fromLTRB(24, 20, 24, 100),
+                  padding: const EdgeInsets.fromLTRB(
+                      24, 20, 24, 100), // Added bottom padding for navigation
                   sliver: SliverList(
                     delegate: SliverChildListDelegate([
                       _buildMainLocationCard(_animations[0]),
@@ -93,7 +95,7 @@ class _LocationPageState extends State<LocationPage> with SingleTickerProviderSt
             left: 0,
             right: 0,
             bottom: 0,
-            child: NavigationMenu(),
+            child: NavigationMenu(showBackButton: true),
           ),
         ],
       ),
@@ -138,10 +140,13 @@ class _LocationPageState extends State<LocationPage> with SingleTickerProviderSt
                           const SizedBox(width: 16),
                           Text(
                             'Bodø',
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: AppTheme.primaryGreen,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(
+                                  color: AppTheme.primaryGreen,
+                                  fontWeight: FontWeight.w600,
+                                ),
                           ),
                         ],
                       ),
@@ -149,9 +154,9 @@ class _LocationPageState extends State<LocationPage> with SingleTickerProviderSt
                       Text(
                         'Bestemorstua er et vakkert lokale med sjarmerende atmosfære og nydelig utsikt. Det er god plass til både middag og dans utover kvelden.',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Colors.black87,
-                          height: 1.6,
-                        ),
+                              color: Colors.black87,
+                              height: 1.6,
+                            ),
                       ),
                       const SizedBox(height: 24),
                       Container(
@@ -204,9 +209,9 @@ class _LocationPageState extends State<LocationPage> with SingleTickerProviderSt
                   child: Text(
                     'Transport',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                    ),
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                        ),
                   ),
                 ),
                 _buildTransportCard(
@@ -265,18 +270,20 @@ class _LocationPageState extends State<LocationPage> with SingleTickerProviderSt
                       children: [
                         Text(
                           title,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: AppTheme.primaryGreen,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: AppTheme.primaryGreen,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                         ),
                         const SizedBox(height: 8),
                         Text(
                           description,
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Colors.black87,
-                            height: 1.5,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Colors.black87,
+                                    height: 1.5,
+                                  ),
                         ),
                       ],
                     ),

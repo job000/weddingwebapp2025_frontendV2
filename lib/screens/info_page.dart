@@ -58,16 +58,18 @@ class _InfoPageState extends State<InfoPage>
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(24, 100, 24, 100), // Added bottom padding
+                padding: const EdgeInsets.fromLTRB(
+                    24, 100, 24, 100), // Added bottom padding
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Alt du trenger å vite',
-                      style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w300,
-                          ),
+                      style:
+                          Theme.of(context).textTheme.displayMedium?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                              ),
                     ),
                     const SizedBox(height: 40),
                     _buildAnimatedInfoCard(
@@ -114,7 +116,7 @@ class _InfoPageState extends State<InfoPage>
             left: 0,
             right: 0,
             bottom: 0,
-            child: NavigationMenu(),
+            child: NavigationMenu(showBackButton: true),
           ),
         ],
       ),

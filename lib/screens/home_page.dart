@@ -58,46 +58,96 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 pinned: true,
                 stretch: true,
                 backgroundColor: Colors.transparent,
-                flexibleSpace: FlexibleSpaceBar(
-                  titlePadding: const EdgeInsets.all(16),
-                  title: const Text(
-                    'Frida & John Michael',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300,
-                      letterSpacing: 1.2,
-                      fontSize: 28,
-                    ),
-                  ),
-                  background: ShaderMask(
-                    shaderCallback: (rect) {
-                      return LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.black.withOpacity(0.7),
-                          Colors.transparent,
-                        ],
-                      ).createShader(rect);
-                    },
-                    blendMode: BlendMode.darken,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: AppTheme.backgroundGradient,
-                      ),
-                      child: const Center(
-                        child: Text(
-                          '27. - 28. juni 2025',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w300,
-                            letterSpacing: 1.2,
+                collapsedHeight: kToolbarHeight,
+                flexibleSpace: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    final double percent = (constraints.maxHeight - kToolbarHeight) / (MediaQuery.of(context).size.height * 0.6 - kToolbarHeight);
+                    
+                    return FlexibleSpaceBar(
+                      stretchModes: const [
+                        StretchMode.zoomBackground,
+                        StretchMode.blurBackground,
+                      ],
+                      titlePadding: EdgeInsets.zero,
+                      title: Container(
+                        width: double.infinity,
+                        color: percent < 0.5 
+                            ? Colors.black.withOpacity(0.3)
+                            : Colors.transparent,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 16,
+                          ),
+                          child: Text(
+                            'Frida & John Michael',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w300,
+                              letterSpacing: 1.2,
+                              fontSize: percent > 0.6 ? 24 : 20,
+                              shadows: [
+                                Shadow(
+                                  color: Colors.black.withOpacity(0.5),
+                                  offset: const Offset(0, 2),
+                                  blurRadius: 4,
+                                ),
+                              ],
+                            ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
-                    ),
-                  ),
+                      background: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Image.asset(
+                            'assets/images/wedding_background.jpg',
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.network(
+                                'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2274&q=80',
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          ),
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.black.withOpacity(0.7),
+                                  Colors.transparent,
+                                  Colors.black.withOpacity(0.7),
+                                ],
+                                stops: const [0.0, 0.5, 1.0],
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: MediaQuery.of(context).size.height * 0.25,
+                            left: 0,
+                            right: 0,
+                            child: AnimatedOpacity(
+                              duration: const Duration(milliseconds: 300),
+                              opacity: percent > 0.5 ? 1.0 : 0.0,
+                              child: const Text(
+                                '27. - 28. juni 2025',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w300,
+                                  letterSpacing: 1.2,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
               SliverPadding(

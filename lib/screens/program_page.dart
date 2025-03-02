@@ -123,7 +123,7 @@ class _ProgramPageState extends State<ProgramPage>
             left: 0,
             right: 0,
             bottom: 0,
-            child: NavigationMenu(),
+            child: NavigationMenu(showBackButton: true),
           ),
         ],
       ),

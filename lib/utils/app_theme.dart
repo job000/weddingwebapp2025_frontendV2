@@ -62,15 +62,23 @@ class AppTheme {
   );
 
   static final bottomNavDecoration = BoxDecoration(
-    color: Colors.white.withOpacity(0.95),
+    color: Colors.white.withOpacity(0.85),
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(16),
+      topRight: Radius.circular(16),
+    ),
     boxShadow: [
       BoxShadow(
         color: Colors.black.withOpacity(0.05),
-        blurRadius: 20,
-        offset: const Offset(0, -5),
-        spreadRadius: 0,
+        blurRadius: 16,
+        offset: const Offset(0, -4),
+        spreadRadius: -2,
       ),
     ],
+    border: Border.all(
+      color: Colors.white.withOpacity(0.2),
+      width: 1,
+    ),
   );
 
   static ThemeData get theme {
