@@ -77583,7 +77583,7 @@ o=m.c
 o.toString
 o=A.Q(o).p2.y
 n=t.p
-return A.yv(A.dQ(B.aw,A.b([A.G3(k,B.dH,A.b([s,new A.lW(B.CM,A.K9(A.K5(A.b([B.hy,new A.cz(r,!1,A.oK(A.cG(A.b([p,B.hx,A.b6("Det er med stor glede vi inviterer deg til \xe5 feire v\xe5r store dag sammen med oss.",l,l,l,o==null?l:o.adj(B.A,1.5,0.3),B.bC,l)],n),B.R,B.C,B.F),new A.aq(r,new A.ab(B.h1,B.f,q),q.i("aq<ae.T>")),l,!0),l),B.y8,m.Ih(m.f[1],"Vielse","27. juni 2025, kl. 12:00","Intim seremoni for n\xe6r familie",B.mC),B.hx,m.Ih(m.f[2],"Bryllupsfest","28. juni 2025, kl. 15:00","Bestemorstua, Bod\xf8",B.Dj),B.Mk],n))),l)],n)),B.wV],n),B.J,B.b2))},
+return A.yv(A.dQ(B.aw,A.b([A.G3(k,B.dH,A.b([s,new A.lW(B.CM,A.K9(A.K5(A.b([B.hy,new A.cz(r,!1,A.oK(A.cG(A.b([p,B.hx,A.b6("Det er med stor glede vi inviterer deg til \xe5 feire v\xe5r store dag sammen med oss.",l,l,l,o==null?l:o.adj(B.A,1.5,0.3),B.bC,l)],n),B.R,B.C,B.F),new A.aq(r,new A.ab(B.h1,B.f,q),q.i("aq<ae.T>")),l,!0),l),B.y8,m.Ih(m.f[1],"Vielse","27. juni 2025, kl. 11:00","Intim seremoni for n\xe6r familie",B.mC),B.hx,m.Ih(m.f[2],"Bryllupsfest","28. juni 2025, kl. 15:00","Bestemorstua, Bod\xf8",B.Dj),B.Mk],n))),l)],n)),B.wV],n),B.J,B.b2))},
 Ih(a,b,c,d,e){var s,r,q=null,p=t.Ni,o=$.kG(),n=A.bp(20),m=$.kH(),l=A.ep(e,B.h,q,48),k=this.c
 k.toString
 k=A.Q(k).p2.e
