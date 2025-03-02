@@ -56,6 +56,7 @@ class _InfoPageState extends State<InfoPage>
                   stretch: true,
                   expandedHeight: 200,
                   backgroundColor: Colors.transparent,
+                  automaticallyImplyLeading: false, // Fjerner tilbake-knappen
                   flexibleSpace: FlexibleSpaceBar(
                     title: const Text('Praktisk Info'),
                     background: Stack(
@@ -138,7 +139,8 @@ class _InfoPageState extends State<InfoPage>
   }
 
   Widget _buildAccommodationCard() {
-    final hotelUrl = Uri.parse('https://www.strawberry.no/hotell/norge/bodo/comfort-hotel-bodo/');
+    final hotelUrl = Uri.parse(
+        'https://www.strawberry.no/hotell/norge/bodo/comfort-hotel-bodo/');
 
     return Container(
       decoration: BoxDecoration(
@@ -245,7 +247,7 @@ class _InfoPageState extends State<InfoPage>
                       const SizedBox(height: 12),
                       InkWell(
                         onTap: () async {
-                          if (!await launchUrl(hotelUrl, 
+                          if (!await launchUrl(hotelUrl,
                               mode: LaunchMode.externalApplication)) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -281,7 +283,7 @@ class _InfoPageState extends State<InfoPage>
                       const SizedBox(height: 8),
                       GestureDetector(
                         onTap: () async {
-                          if (!await launchUrl(hotelUrl, 
+                          if (!await launchUrl(hotelUrl,
                               mode: LaunchMode.externalApplication)) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -293,11 +295,12 @@ class _InfoPageState extends State<InfoPage>
                         },
                         child: Text(
                           'https://www.strawberry.no/hotell/norge/bodo/comfort-hotel-bodo/',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: AppTheme.primaryGreen,
-                                fontStyle: FontStyle.italic,
-                                decoration: TextDecoration.underline,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: AppTheme.primaryGreen,
+                                    fontStyle: FontStyle.italic,
+                                    decoration: TextDecoration.underline,
+                                  ),
                         ),
                       ),
                     ],

@@ -80,13 +80,14 @@ class _ProgramPageState extends State<ProgramPage>
                   stretch: true,
                   expandedHeight: 250,
                   backgroundColor: Colors.transparent,
+                  automaticallyImplyLeading: false, // Fjerner tilbake-knappen
                   flexibleSpace: FlexibleSpaceBar(
                     title: const Text('Program'),
                     background: Stack(
                       fit: StackFit.expand,
                       children: [
                         Image.network(
-                          'https://images.unsplash.com/photo-1517722014278-c256a91a6fba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                          'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
                             return Container(
@@ -190,14 +191,14 @@ class _ProgramPageState extends State<ProgramPage>
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
                 child: Image.network(
                   dayTitle.contains('Fredag')
-                      ? 'https://images.unsplash.com/photo-1494955870715-e74e4b6b4066?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80' // Bilde for fredag
-                      : 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80', // Bilde for lørdag
-                  height: 120,
+                      ? 'https://images.unsplash.com/photo-1522673607200-17b5ed6fea97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80' // Nytt bilde for fredag
+                      : 'https://images.unsplash.com/photo-1522413452208-996ff3f3e740?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80', // Nytt bilde for lørdag
+                  height: 160, // Økt høyde for bildene
                   width: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
-                      height: 80,
+                      height: 160,
                       color: AppTheme.primaryGreen.withOpacity(0.2),
                     );
                   },
@@ -205,7 +206,7 @@ class _ProgramPageState extends State<ProgramPage>
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 child: Text(
                   dayTitle,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(

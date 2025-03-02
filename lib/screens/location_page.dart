@@ -61,6 +61,7 @@ class _LocationPageState extends State<LocationPage>
                   stretch: true,
                   expandedHeight: 250,
                   backgroundColor: Colors.transparent,
+                  automaticallyImplyLeading: false, // Fjerner tilbake-knappen
                   flexibleSpace: FlexibleSpaceBar(
                     title: const Text('Bestemorstua'),
                     background: Stack(

@@ -71,6 +71,7 @@ class _RSVPPageState extends State<RSVPPage>
                   stretch: true,
                   expandedHeight: 200,
                   backgroundColor: Colors.transparent,
+                  automaticallyImplyLeading: false, // Fjerner tilbake-knappen
                   flexibleSpace: FlexibleSpaceBar(
                     title: const Text('RSVP'),
                     background: Container(
