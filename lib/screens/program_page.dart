@@ -78,21 +78,42 @@ class _ProgramPageState extends State<ProgramPage>
                 SliverAppBar(
                   pinned: true,
                   stretch: true,
-                  expandedHeight: 200,
+                  expandedHeight: 250,
                   backgroundColor: Colors.transparent,
                   flexibleSpace: FlexibleSpaceBar(
                     title: const Text('Program'),
-                    background: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            AppTheme.primaryGreen.withOpacity(0.7),
-                            Colors.transparent,
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
+                    background: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Image.network(
+                          'https://images.unsplash.com/photo-1517722014278-c256a91a6fba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: AppTheme.primaryGreen,
+                              child: const Center(
+                                child: Icon(
+                                  Icons.event,
+                                  color: Colors.white,
+                                  size: 48,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      ),
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.black.withOpacity(0.6),
+                                Colors.transparent,
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -100,18 +121,29 @@ class _ProgramPageState extends State<ProgramPage>
                   padding: const EdgeInsets.fromLTRB(24, 20, 24, 100),
                   sliver: SliverList(
                     delegate: SliverChildListDelegate([
-                      _buildDaySection(
-                        context,
-                        'Fredag 27. juni',
-                        _fridayEvents,
-                        0,
-                      ),
-                      const SizedBox(height: 48),
-                      _buildDaySection(
-                        context,
-                        'Lørdag 28. juni',
-                        _saturdayEvents,
-                        _fridayEvents.length,
+                      Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            maxWidth: AppTheme.maxContentWidth,
+                          ),
+                          child: Column(
+                            children: [
+                              _buildDaySection(
+                                context,
+                                'Fredag 27. juni',
+                                _fridayEvents,
+                                0,
+                              ),
+                              const SizedBox(height: 48),
+                              _buildDaySection(
+                                context,
+                                'Lørdag 28. juni',
+                                _saturdayEvents,
+                                _fridayEvents.length,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ]),
                   ),
@@ -141,7 +173,6 @@ class _ProgramPageState extends State<ProgramPage>
       children: [
         Container(
           margin: const EdgeInsets.only(bottom: 24),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.9),
             borderRadius: BorderRadius.circular(12),
@@ -153,12 +184,37 @@ class _ProgramPageState extends State<ProgramPage>
               ),
             ],
           ),
-          child: Text(
-            dayTitle,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: AppTheme.primaryGreen,
-                  fontWeight: FontWeight.bold,
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                child: Image.network(
+                  dayTitle.contains('Fredag')
+                      ? 'https://images.unsplash.com/photo-1494955870715-e74e4b6b4066?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80' // Bilde for fredag
+                      : 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80', // Bilde for lørdag
+                  height: 120,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      height: 80,
+                      color: AppTheme.primaryGreen.withOpacity(0.2),
+                    );
+                  },
                 ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                child: Text(
+                  dayTitle,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: AppTheme.primaryGreen,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ),
+            ],
           ),
         ),
         ...List.generate(events.length, (index) {

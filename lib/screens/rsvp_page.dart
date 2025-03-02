@@ -95,22 +95,29 @@ class _RSVPPageState extends State<RSVPPage>
                         opacity: _fadeAnimation,
                         child: SlideTransition(
                           position: _slideAnimation,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Vi håper du kommer!',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displaySmall
-                                    ?.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w300,
-                                    ),
+                          child: Center(
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                maxWidth: AppTheme.maxContentWidth,
                               ),
-                              const SizedBox(height: 40),
-                              _buildRSVPCard(),
-                            ],
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Vi håper du kommer!',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall
+                                        ?.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                  ),
+                                  const SizedBox(height: 40),
+                                  _buildRSVPCard(),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ),

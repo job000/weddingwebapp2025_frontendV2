@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui';
@@ -80,7 +82,8 @@ class _NavigationMenuState extends State<NavigationMenu>
             child: Container(
               decoration: AppTheme.bottomNavDecoration,
               child: Container(
-                height: 60, // Fast høyde
+                height:
+                    60 + MediaQuery.of(context).padding.bottom, // Justert høyde
                 padding: EdgeInsets.only(
                   left: 16,
                   right: 16,
@@ -93,26 +96,33 @@ class _NavigationMenuState extends State<NavigationMenu>
                       _buildBackButton()
                     else
                       const SizedBox(width: 40),
+                    const SizedBox(width: 24), // Økt mellomrom når hjemknappen vises
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          _buildNavItem(
-                            'Program',
-                            AppRoutes.program,
-                            Icons.event_note_outlined,
+                          Expanded(
+                            child: _buildNavItem(
+                              'Program',
+                              AppRoutes.program,
+                              Icons.event_note_outlined,
+                            ),
                           ),
-                          const SizedBox(width: 32),
-                          _buildNavItem(
-                            'Sted',
-                            AppRoutes.location,
-                            Icons.location_on_outlined,
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: _buildNavItem(
+                              'Sted',
+                              AppRoutes.location,
+                              Icons.location_on_outlined,
+                            ),
                           ),
-                          const SizedBox(width: 32),
-                          _buildNavItem(
-                            'Info',
-                            AppRoutes.info,
-                            Icons.info_outline,
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: _buildNavItem(
+                              'Info',
+                              AppRoutes.info,
+                              Icons.info_outline,
+                            ),
                           ),
                         ],
                       ),
@@ -209,8 +219,8 @@ class _NavigationMenuState extends State<NavigationMenu>
               scale: isPressed ? 0.95 : 1.0,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding: EdgeInsets.symmetric(
-                  horizontal: isHovered ? 16 : 12,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
@@ -228,30 +238,28 @@ class _NavigationMenuState extends State<NavigationMenu>
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    AnimatedScale(
-                      duration: const Duration(milliseconds: 200),
-                      scale: isHovered ? 1.1 : 1.0,
-                      child: Icon(
-                        icon,
-                        color: isSelected || isHovered
-                            ? AppTheme.primaryGreen
-                            : Colors.grey.shade600,
-                        size: 20,
-                      ),
+                    Icon(
+                      icon,
+                      color: isSelected || isHovered
+                          ? AppTheme.primaryGreen
+                          : Colors.grey.shade600,
+                      size: 18,
                     ),
-                    const SizedBox(width: 8),
-                    AnimatedDefaultTextStyle(
-                      duration: const Duration(milliseconds: 200),
-                      style: TextStyle(
-                        color: isSelected || isHovered
-                            ? AppTheme.primaryGreen
-                            : Colors.grey.shade600,
-                        fontSize: 14,
-                        fontWeight:
-                            isSelected ? FontWeight.w600 : FontWeight.w500,
-                        letterSpacing: 0.3,
+                    const SizedBox(width: 4),
+                    Flexible(
+                      child: Text(
+                        label,
+                        style: TextStyle(
+                          color: isSelected || isHovered
+                              ? AppTheme.primaryGreen
+                              : Colors.grey.shade600,
+                          fontSize: 13,
+                          fontWeight:
+                              isSelected ? FontWeight.w600 : FontWeight.w500,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        maxLines: 1,
                       ),
-                      child: Text(label),
                     ),
                   ],
                 ),

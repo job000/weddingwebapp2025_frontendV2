@@ -59,21 +59,42 @@ class _LocationPageState extends State<LocationPage>
                 SliverAppBar(
                   pinned: true,
                   stretch: true,
-                  expandedHeight: 200,
+                  expandedHeight: 250,
                   backgroundColor: Colors.transparent,
                   flexibleSpace: FlexibleSpaceBar(
                     title: const Text('Bestemorstua'),
-                    background: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            AppTheme.primaryGreen.withOpacity(0.7),
-                            Colors.transparent,
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
+                    background: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Image.network(
+                          'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: AppTheme.primaryGreen,
+                              child: const Center(
+                                child: Icon(
+                                  Icons.location_on,
+                                  color: Colors.white,
+                                  size: 48,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      ),
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.black.withOpacity(0.6),
+                                Colors.transparent,
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -82,9 +103,20 @@ class _LocationPageState extends State<LocationPage>
                       24, 20, 24, 100), // Added bottom padding for navigation
                   sliver: SliverList(
                     delegate: SliverChildListDelegate([
-                      _buildMainLocationCard(_animations[0]),
-                      const SizedBox(height: 40),
-                      _buildTransportSection(_animations[1]),
+                      Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            maxWidth: AppTheme.maxContentWidth,
+                          ),
+                          child: Column(
+                            children: [
+                              _buildMainLocationCard(_animations[0]),
+                              const SizedBox(height: 40),
+                              _buildTransportSection(_animations[1]),
+                            ],
+                          ),
+                        ),
+                      ),
                     ]),
                   ),
                 ),
@@ -159,27 +191,38 @@ class _LocationPageState extends State<LocationPage>
                             ),
                       ),
                       const SizedBox(height: 24),
-                      Container(
-                        height: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          gradient: LinearGradient(
-                            colors: [
-                              AppTheme.primaryGreen.withOpacity(0.1),
-                              AppTheme.primaryGreen.withOpacity(0.05),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Kart kommer her',
-                            style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: 16,
-                            ),
-                          ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.network(
+                          'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80',
+                          height: 200,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              height: 200,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    AppTheme.primaryGreen.withOpacity(0.1),
+                                    AppTheme.primaryGreen.withOpacity(0.05),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'Kart kommer her',
+                                  style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],

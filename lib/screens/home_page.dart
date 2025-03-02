@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:math';
 import 'package:weddingwebapp2025/utils/app_theme.dart';
 import 'package:weddingwebapp2025/widgets/navigation_menu.dart';
 
@@ -14,6 +16,15 @@ class _HomePageState extends State<HomePage>
   late ScrollController _scrollController;
   late AnimationController _animationController;
   late List<Animation<double>> _cardAnimations;
+
+  // Bilder for slideshow - oppdatert med faktiske bilder
+  final List<String> _backgroundImages = [
+    'assets/images/wedding_background.jpg'
+  ];
+
+  int _currentImageIndex = 0;
+  Timer? _imageChangeTimer;
+  final Random _random = Random();
 
   @override
   void initState() {
@@ -36,13 +47,33 @@ class _HomePageState extends State<HomePage>
     });
 
     _animationController.forward();
+
+    // Start bildebytte-timer
+    _startImageChangeTimer();
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
     _animationController.dispose();
+    _imageChangeTimer?.cancel();
     super.dispose();
+  }
+
+  void _startImageChangeTimer() {
+    _imageChangeTimer = Timer.periodic(const Duration(seconds: 10), (timer) {
+      if (_backgroundImages.length > 1) {
+        setState(() {
+          // Velg et tilfeldig bilde som ikke er det nåværende
+          int nextIndex;
+          do {
+            nextIndex = _random.nextInt(_backgroundImages.length);
+          } while (nextIndex == _currentImageIndex);
+
+          _currentImageIndex = nextIndex;
+        });
+      }
+    });
   }
 
   @override
@@ -107,18 +138,34 @@ class _HomePageState extends State<HomePage>
                         children: [
                           ColoredBox(
                             color: AppTheme.primaryGreen.withOpacity(0.8),
-                            child: Image.network(
-                              'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2274&q=80',
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return const Center(
-                                  child: Icon(
-                                    Icons.favorite,
-                                    color: Colors.white,
-                                    size: 64,
-                                  ),
-                                );
+                            child: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 1000),
+                              transitionBuilder:
+                                  (Widget child, Animation<double> animation) {
+                                return FadeTransition(
+                                    opacity: animation, child: child);
                               },
+                              child: Image.asset(
+                                _backgroundImages[_currentImageIndex],
+                                key: ValueKey<int>(_currentImageIndex),
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  // Fallback til nettverksbilde hvis det lokale bildet ikke lastes
+                                  return Image.network(
+                                    'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2274&q=80',
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return const Center(
+                                        child: Icon(
+                                          Icons.favorite,
+                                          color: Colors.white,
+                                          size: 64,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
                             ),
                           ),
                           DecoratedBox(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weddingwebapp2025/utils/app_theme.dart';
 import 'package:weddingwebapp2025/widgets/navigation_menu.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -57,17 +58,38 @@ class _InfoPageState extends State<InfoPage>
                   backgroundColor: Colors.transparent,
                   flexibleSpace: FlexibleSpaceBar(
                     title: const Text('Praktisk Info'),
-                    background: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            AppTheme.primaryGreen.withOpacity(0.7),
-                            Colors.transparent,
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
+                    background: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Image.network(
+                          'https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: AppTheme.primaryGreen,
+                              child: const Center(
+                                child: Icon(
+                                  Icons.info,
+                                  color: Colors.white,
+                                  size: 48,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      ),
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.black.withOpacity(0.6),
+                                Colors.transparent,
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -77,16 +99,25 @@ class _InfoPageState extends State<InfoPage>
                     delegate: SliverChildListDelegate([
                       FadeTransition(
                         opacity: _fadeAnimation,
-                        child: Column(
-                          children: [
-                            _buildAccommodationCard(),
-                            const SizedBox(height: 40),
-                            _buildDressCodeSection(),
-                            const SizedBox(height: 40),
-                            _buildGiftsCard(),
-                            const SizedBox(height: 40),
-                            _buildAllergiesCard(),
-                          ],
+                        child: Center(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              maxWidth: AppTheme.maxContentWidth,
+                            ),
+                            child: Column(
+                              children: [
+                                _buildAccommodationCard(),
+                                const SizedBox(height: 40),
+                                _buildToastmasterCard(),
+                                const SizedBox(height: 40),
+                                _buildDressCodeSection(),
+                                const SizedBox(height: 40),
+                                _buildGiftsCard(),
+                                const SizedBox(height: 40),
+                                _buildAllergiesCard(),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ]),
@@ -107,6 +138,180 @@ class _InfoPageState extends State<InfoPage>
   }
 
   Widget _buildAccommodationCard() {
+    final hotelUrl = Uri.parse('https://www.strawberry.no/hotell/norge/bodo/comfort-hotel-bodo/');
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: AppTheme.cardGradient,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: AppTheme.modernShadow,
+      ),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            child: Image.network(
+              'https://images.squarespace-cdn.com/content/v1/63eb4a8a6b16144d7af2f6db/17575a56-ec1b-4604-8d46-11c71a937611/Comfort+Hotel+Bod%C3%B8.png?format=1000w',
+              height: 200,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  height: 150,
+                  color: AppTheme.primaryGreen.withOpacity(0.2),
+                  child: const Center(
+                    child: Icon(
+                      Icons.hotel_outlined,
+                      color: Colors.white,
+                      size: 48,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: AppTheme.primaryGreen.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(
+                        Icons.hotel_outlined,
+                        color: AppTheme.primaryGreen,
+                        size: 28,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Text(
+                      'Overnatting',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: AppTheme.primaryGreen,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'Vi har reservert rom på Comfort Hotel Bodø for gjester. Bruk koden "BRYLLUP2025" ved bestilling for å få rabatt. Booking må gjøres før 1. mai 2025 for å benytte rabatten.',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Colors.black87,
+                        height: 1.6,
+                      ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppTheme.primaryGreen.withOpacity(0.05),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: AppTheme.primaryGreen.withOpacity(0.2),
+                      width: 1,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.info_outline,
+                            color: AppTheme.primaryGreen,
+                            size: 20,
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              'Kontakt hotellet direkte på tlf: +47 755 50 900 eller e-post: co.bodo@choice.no',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    color: Colors.black87,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      InkWell(
+                        onTap: () async {
+                          if (!await launchUrl(hotelUrl, 
+                              mode: LaunchMode.externalApplication)) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Kunne ikke åpne nettsiden'),
+                                backgroundColor: Colors.red.shade700,
+                              ),
+                            );
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.link,
+                              color: AppTheme.primaryGreen,
+                              size: 20,
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                'Besøk hotellets nettside for mer informasjon',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      color: AppTheme.primaryGreen,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      GestureDetector(
+                        onTap: () async {
+                          if (!await launchUrl(hotelUrl, 
+                              mode: LaunchMode.externalApplication)) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Kunne ikke åpne nettsiden'),
+                                backgroundColor: Colors.red.shade700,
+                              ),
+                            );
+                          }
+                        },
+                        child: Text(
+                          'https://www.strawberry.no/hotell/norge/bodo/comfort-hotel-bodo/',
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: AppTheme.primaryGreen,
+                                fontStyle: FontStyle.italic,
+                                decoration: TextDecoration.underline,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildToastmasterCard() {
     return Container(
       decoration: BoxDecoration(
         gradient: AppTheme.cardGradient,
@@ -127,14 +332,14 @@ class _InfoPageState extends State<InfoPage>
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
-                    Icons.hotel_outlined,
+                    Icons.contact_support_outlined,
                     color: AppTheme.primaryGreen,
                     size: 28,
                   ),
                 ),
                 const SizedBox(width: 16),
                 Text(
-                  'Overnatting',
+                  'Toastmaster',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: AppTheme.primaryGreen,
                         fontWeight: FontWeight.w600,
@@ -144,7 +349,7 @@ class _InfoPageState extends State<InfoPage>
             ),
             const SizedBox(height: 20),
             Text(
-              'Vi har reservert rom på Scandic Havet for gjester. Bruk koden "BRYLLUP2025" ved bestilling for å få rabatt. Booking må gjøres før 1. mai 2025 for å benytte rabatten.',
+              'Vår toastmaster for bryllupet er Per Hansen. Ta gjerne kontakt med ham om du har spørsmål, ønsker å holde tale, eller har andre bidrag til festen.',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Colors.black87,
                     height: 1.6,
@@ -164,14 +369,14 @@ class _InfoPageState extends State<InfoPage>
               child: Row(
                 children: [
                   Icon(
-                    Icons.info_outline,
+                    Icons.phone_outlined,
                     color: AppTheme.primaryGreen,
                     size: 20,
                   ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      'Kontakt hotellet direkte på tlf: +47 21 61 40 00 eller e-post: havet@scandichotels.com',
+                      'Per kan nås på telefon: +47 123 45 678 eller e-post: toastmaster@example.com',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Colors.black87,
                           ),
@@ -222,45 +427,64 @@ class _InfoPageState extends State<InfoPage>
         borderRadius: BorderRadius.circular(20),
         boxShadow: AppTheme.modernShadow,
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            child: Image.network(
+              'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2040&q=80',
+              height: 150,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  height: 150,
+                  color: AppTheme.primaryGreen.withOpacity(0.2),
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: AppTheme.primaryGreen.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Icon(
-                    Icons.card_giftcard_outlined,
-                    color: AppTheme.primaryGreen,
-                    size: 28,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Text(
-                  'Gaver',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: AppTheme.primaryGreen.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(
+                        Icons.card_giftcard_outlined,
                         color: AppTheme.primaryGreen,
-                        fontWeight: FontWeight.w600,
+                        size: 28,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Text(
+                      'Gaver',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: AppTheme.primaryGreen,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'Deres tilstedeværelse er den største gaven for oss. Om dere likevel ønsker å gi en gave, setter vi pris på et bidrag til vår bryllupsreise. Gavekonto: 1234.56.78910',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Colors.black87,
+                        height: 1.6,
                       ),
                 ),
               ],
             ),
-            const SizedBox(height: 20),
-            Text(
-              'Deres tilstedeværelse er den største gaven for oss. Om dere likevel ønsker å gi en gave, setter vi pris på et bidrag til vår bryllupsreise. Gavekonto: 1234.56.78910',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Colors.black87,
-                    height: 1.6,
-                  ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

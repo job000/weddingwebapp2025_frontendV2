@@ -28,8 +28,8 @@ class AppTheme {
 
   static final cardGradient = LinearGradient(
     colors: [
-      surfaceLight,
-      Colors.white,
+      surfaceLight.withOpacity(0.95), // Mer transparent surfaceLight
+      Colors.white.withOpacity(0.90), // Mer transparent hvit
     ],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -37,8 +37,8 @@ class AppTheme {
 
   static final backgroundGradient = LinearGradient(
     colors: [
-      backgroundGreen.withOpacity(0.95),
-      primaryGreen.withOpacity(0.8),
+      backgroundGreen.withOpacity(0.85), // Mer transparent bakgrunnsfarge
+      primaryGreen.withOpacity(0.75), // Mer transparent primærfarge
     ],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
@@ -88,6 +88,9 @@ class AppTheme {
       width: 1,
     ),
   );
+
+  // Konstant for maksbredde på innholdskort
+  static const double maxContentWidth = 800;
 
   static ThemeData get theme {
     return ThemeData(
