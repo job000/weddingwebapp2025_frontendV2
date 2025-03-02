@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weddingwebapp2025/utils/app_theme.dart';
+import 'package:weddingwebapp2025/widgets/navigation_menu.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -50,62 +51,72 @@ class _InfoPageState extends State<InfoPage>
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Container(
-        decoration: BoxDecoration(gradient: AppTheme.backgroundGradient),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 100, 24, 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Alt du trenger å vite',
-                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w300,
-                      ),
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(gradient: AppTheme.backgroundGradient),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(24, 100, 24, 100), // Added bottom padding
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Alt du trenger å vite',
+                      style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w300,
+                          ),
+                    ),
+                    const SizedBox(height: 40),
+                    _buildAnimatedInfoCard(
+                      context,
+                      'Overnatting',
+                      'Vi har reservert rom på Scandic Havet for gjester. Bruk koden "BRYLLUP2025" ved bestilling for å få rabatt.',
+                      Icons.hotel_outlined,
+                      _cardAnimations[0],
+                    ),
+                    _buildAnimatedInfoCard(
+                      context,
+                      'Dresscode',
+                      'Antrekk: Pent. Menn kan bruke dress eller pent antrekk, damer kjole eller pent antrekk.',
+                      Icons.checkroom_outlined,
+                      _cardAnimations[1],
+                    ),
+                    _buildAnimatedInfoCard(
+                      context,
+                      'Gaver',
+                      'Deres tilstedeværelse er den største gaven for oss. Om dere likevel ønsker å gi en gave, setter vi pris på et bidrag til vår bryllupsreise.',
+                      Icons.card_giftcard_outlined,
+                      _cardAnimations[2],
+                    ),
+                    _buildAnimatedInfoCard(
+                      context,
+                      'Barn',
+                      'Barn er hjertelig velkomne i bryllupet. Vi vil ha aktiviteter for de minste.',
+                      Icons.child_care_outlined,
+                      _cardAnimations[3],
+                    ),
+                    _buildAnimatedInfoCard(
+                      context,
+                      'Allergier',
+                      'Vennligst gi oss beskjed om matallergier eller spesielle diettbehov når du svarer på invitasjonen.',
+                      Icons.restaurant_outlined,
+                      _cardAnimations[4],
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 40),
-                _buildAnimatedInfoCard(
-                  context,
-                  'Overnatting',
-                  'Vi har reservert rom på Scandic Havet for gjester. Bruk koden "BRYLLUP2025" ved bestilling for å få rabatt.',
-                  Icons.hotel_outlined,
-                  _cardAnimations[0],
-                ),
-                _buildAnimatedInfoCard(
-                  context,
-                  'Dresscode',
-                  'Antrekk: Pent. Menn kan bruke dress eller pent antrekk, damer kjole eller pent antrekk.',
-                  Icons.checkroom_outlined,
-                  _cardAnimations[1],
-                ),
-                _buildAnimatedInfoCard(
-                  context,
-                  'Gaver',
-                  'Deres tilstedeværelse er den største gaven for oss. Om dere likevel ønsker å gi en gave, setter vi pris på et bidrag til vår bryllupsreise.',
-                  Icons.card_giftcard_outlined,
-                  _cardAnimations[2],
-                ),
-                _buildAnimatedInfoCard(
-                  context,
-                  'Barn',
-                  'Barn er hjertelig velkomne i bryllupet. Vi vil ha aktiviteter for de minste.',
-                  Icons.child_care_outlined,
-                  _cardAnimations[3],
-                ),
-                _buildAnimatedInfoCard(
-                  context,
-                  'Allergier',
-                  'Vennligst gi oss beskjed om matallergier eller spesielle diettbehov når du svarer på invitasjonen.',
-                  Icons.restaurant_outlined,
-                  _cardAnimations[4],
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+          const Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: NavigationMenu(),
+          ),
+        ],
       ),
     );
   }

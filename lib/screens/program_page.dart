@@ -10,7 +10,8 @@ class ProgramPage extends StatefulWidget {
   State<ProgramPage> createState() => _ProgramPageState();
 }
 
-class _ProgramPageState extends State<ProgramPage> with SingleTickerProviderStateMixin {
+class _ProgramPageState extends State<ProgramPage>
+    with SingleTickerProviderStateMixin {
   late ScrollController _scrollController;
   late AnimationController _controller;
   late List<Animation<double>> _timelineAnimations;
@@ -155,9 +156,9 @@ class _ProgramPageState extends State<ProgramPage> with SingleTickerProviderStat
           child: Text(
             dayTitle,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: AppTheme.primaryGreen,
-              fontWeight: FontWeight.bold,
-            ),
+                  color: AppTheme.primaryGreen,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
         ),
         ...List.generate(events.length, (index) {
@@ -250,9 +251,10 @@ class _ProgramPageState extends State<ProgramPage> with SingleTickerProviderStat
                           ),
                           child: Text(
                             event.description,
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: Colors.black87,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      color: Colors.black87,
+                                    ),
                           ),
                         ),
                       ),
