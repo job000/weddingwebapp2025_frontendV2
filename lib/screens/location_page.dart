@@ -266,7 +266,7 @@ class _LocationPageState extends State<LocationPage>
                 const SizedBox(height: 16),
                 _buildTransportCard(
                   'Shuttle Service',
-                  'Det vil bli organisert transport fra sentrale hoteller i Bodø til Bestemorstua for gjestene. Mer informasjon kommer.',
+                  'Det vil bli organisert transport fra Bestemorstua til hoteller i Bodø for gjestene. Mer informasjon kommer.',
                   Icons.directions_bus,
                 ),
               ],

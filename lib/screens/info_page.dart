@@ -478,7 +478,7 @@ class _InfoPageState extends State<InfoPage>
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Deres tilstedeværelse er den største gaven for oss.',
+                  '', //TODO: LEGG TIL TEKST HER
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Colors.black87,
                         height: 1.6,
@@ -530,7 +530,7 @@ class _InfoPageState extends State<InfoPage>
             ),
             const SizedBox(height: 20),
             Text(
-              'Vennligst gi oss beskjed om matallergier eller spesielle diettbehov når du svarer på invitasjonen. Vi ønsker at alle skal kunne nyte maten under festen.',
+              'Vennligst oppgi eventuelle matallergier eller spesielle diettbehov når du svarer på invitasjonen. Middagen vil være vegetarisk, og vi ønsker at alle skal kunne nyte maten under festen.',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Colors.black87,
                     height: 1.6,
@@ -538,7 +538,7 @@ class _InfoPageState extends State<InfoPage>
             ),
             const SizedBox(height: 16),
             Text(
-              'Bruk RSVP-skjemaet på nettsiden for å melde fra om allergier eller ring oss direkte på +47 123 45 678.',
+              'Skann QR-koden på invitasjon for å melde fra om allergier eller ring oss direkte på +47 407 64 816 / +47 456 72 291.',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Colors.black54,
                     fontStyle: FontStyle.italic,
