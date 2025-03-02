@@ -203,7 +203,7 @@ class _InfoPageState extends State<InfoPage>
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Vi har reservert rom på Comfort Hotel Bodø for gjester. Bruk koden "BRYLLUP2025" ved bestilling for å få rabatt. Booking må gjøres før 1. mai 2025 for å benytte rabatten.',
+                  'Vi har reservert rom på Comfort Hotel Bodø for gjester. Bruk koden "KODEKOMMERHER" ved bestilling for å få rabatt. Booking må gjøres før 1. mai 2025 for å benytte rabatten.',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Colors.black87,
                         height: 1.6,
@@ -352,7 +352,7 @@ class _InfoPageState extends State<InfoPage>
             ),
             const SizedBox(height: 20),
             Text(
-              'Vår toastmaster for bryllupet er Per Hansen. Ta gjerne kontakt med ham om du har spørsmål, ønsker å holde tale, eller har andre bidrag til festen.',
+              'Vår toastmaster for bryllupet er John Doe. Ta gjerne kontakt med ham om du har spørsmål, ønsker å holde tale, eller har andre bidrag til festen.',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Colors.black87,
                     height: 1.6,
@@ -379,7 +379,7 @@ class _InfoPageState extends State<InfoPage>
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      'Per kan nås på telefon: +47 123 45 678 eller e-post: toastmaster@example.com',
+                      'John kan nås på telefon: +47 123 45 678 eller e-post: toastmaster@example.com',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Colors.black87,
                           ),
@@ -478,7 +478,7 @@ class _InfoPageState extends State<InfoPage>
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Deres tilstedeværelse er den største gaven for oss. Om dere likevel ønsker å gi en gave, setter vi pris på et bidrag til vår bryllupsreise. Gavekonto: 1234.56.78910',
+                  'Deres tilstedeværelse er den største gaven for oss.',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Colors.black87,
                         height: 1.6,

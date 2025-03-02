@@ -20,6 +20,7 @@ class _ProgramPageState extends State<ProgramPage>
   late List<Animation<double>> _timelineAnimations;
 
   final _fridayEvents = [
+    TimelineEvent('10:00', 'Mer info kommer...'),
     TimelineEvent('11:00', 'Vielse med nær familie'),
     TimelineEvent('12:30', 'Lunsj'),
     TimelineEvent('15:00', 'Badstue og bading for de som ønsker'),
@@ -27,6 +28,7 @@ class _ProgramPageState extends State<ProgramPage>
   ];
 
   final _saturdayEvents = [
+    TimelineEvent('14:00', 'Mer info kommer...'),
     TimelineEvent('15:00', 'Ankomst gjester til Bestemorstua'),
     TimelineEvent('16:00', 'Velkomstdrink'),
     TimelineEvent('17:00', 'Middag serveres'),
