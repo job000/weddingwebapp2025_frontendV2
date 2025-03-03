@@ -9,7 +9,7 @@ class RSVPPage extends StatefulWidget {
 
   @override
   State<RSVPPage> createState() => _RSVPPageState();
-  
+
   // Flutter web webview initialiseres via index.html
   static void registerWebView() {
     // Denne metoden er tom siden vi håndterer iframe via index.html
@@ -58,6 +58,7 @@ class _RSVPPageState extends State<RSVPPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationMenu.buildDrawer(context), // Legger til drawer
       body: Stack(
         children: [
           Container(
@@ -302,22 +303,24 @@ class _RSVPPageState extends State<RSVPPage>
       ),
     );
   }
-  
+
   // Åpner Google Forms i en ny fane
   void _openGoogleForm() {
-    final url = 'https://docs.google.com/forms/d/e/1FAIpQLSdvWStQt2a_1kMonK9OOMeNMV4g32Et3hw3sXWXcdXDDkATHQ/viewform';
+    final url =
+        'https://docs.google.com/forms/d/e/1FAIpQLSdvWStQt2a_1kMonK9OOMeNMV4g32Et3hw3sXWXcdXDDkATHQ/viewform';
     try {
       _openUrlInNewTab(url);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Kunne ikke åpne skjemaet. Prøv å kopiere URL-en manuelt.'),
+          content:
+              Text('Kunne ikke åpne skjemaet. Prøv å kopiere URL-en manuelt.'),
           backgroundColor: Colors.red.shade700,
         ),
       );
     }
   }
-  
+
   // Bruker JavaScript til å åpne en URL i en ny fane
   void _openUrlInNewTab(String url) {
     // Kaller JavaScript-funksjonen som er definert i index.html

@@ -79,6 +79,8 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer:
+          NavigationMenu.buildDrawer(context), // Bruker statisk drawer-metode
       body: Stack(
         children: [
           CustomScrollView(

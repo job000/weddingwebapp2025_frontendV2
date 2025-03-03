@@ -48,6 +48,7 @@ class _LocationPageState extends State<LocationPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationMenu.buildDrawer(context), // Legger til drawer
       body: Stack(
         children: [
           Container(

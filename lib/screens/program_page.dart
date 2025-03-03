@@ -70,6 +70,7 @@ class _ProgramPageState extends State<ProgramPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationMenu.buildDrawer(context), // Legger til drawer
       body: Stack(
         children: [
           Container(

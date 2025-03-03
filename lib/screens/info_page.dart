@@ -43,6 +43,7 @@ class _InfoPageState extends State<InfoPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationMenu.buildDrawer(context), // Legger til drawer
       body: Stack(
         children: [
           Container(

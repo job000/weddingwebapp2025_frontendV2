@@ -8,11 +8,206 @@ import 'package:weddingwebapp2025/utils/app_theme.dart';
 
 class NavigationMenu extends StatefulWidget {
   final bool showBackButton;
+  // Statisk variabel som holder på hover-tilstand for drawer-elementer
+  static final Map<String, bool> _drawerHoverStates = {};
 
   const NavigationMenu({
     super.key,
     this.showBackButton = false,
   });
+
+  // Statisk metode for å bygge drawer-innholdet
+  static Drawer buildDrawer(BuildContext context) {
+    return Drawer(
+      backgroundColor: Colors.white,
+      child: SafeArea(
+        child: Column(
+          children: [
+            // Drawer header med brudeparbilde eller logo
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    AppTheme.primaryGreen.withOpacity(0.9),
+                    AppTheme.secondaryGreen.withOpacity(0.8),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Container(
+                      width: 64,
+                      height: 64,
+                      color: Colors.white.withOpacity(0.3),
+                      child: const Icon(
+                        Icons.favorite,
+                        color: Colors.white,
+                        size: 32,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Frida & John Michael',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                      Text(
+                        '27.-28. juni 2025',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.9),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            // Menyelementer
+            _buildDrawerItem(
+              context,
+              'Hjem',
+              AppRoutes.home,
+              Icons.home_outlined,
+            ),
+            _buildDrawerItem(
+              context,
+              'Program',
+              AppRoutes.program,
+              Icons.event_note_outlined,
+            ),
+            _buildDrawerItem(
+              context,
+              'Sted',
+              AppRoutes.location,
+              Icons.location_on_outlined,
+            ),
+            _buildDrawerItem(
+              context,
+              'Info',
+              AppRoutes.info,
+              Icons.info_outline,
+            ),
+            _buildDrawerItem(
+              context,
+              'RSVP',
+              AppRoutes.rsvp,
+              Icons.check_circle_outline,
+            ),
+
+            const Spacer(),
+
+            // Footer-seksjon
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                '© 2025 Frida & John Michael',
+                style: TextStyle(
+                  color: Colors.grey.shade600,
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Helper-metode for å bygge drawer-element
+  static Widget _buildDrawerItem(
+    BuildContext context,
+    String label,
+    String route,
+    IconData icon,
+  ) {
+    final bool isSelected = ModalRoute.of(context)?.settings.name == route;
+
+    return StatefulBuilder(
+      builder: (context, setState) {
+        final bool isHovered = _drawerHoverStates[route] ?? false;
+
+        return MouseRegion(
+          onEnter: (_) => setState(() => _drawerHoverStates[route] = true),
+          onExit: (_) => setState(() => _drawerHoverStates[route] = false),
+          cursor: SystemMouseCursors.click,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                Navigator.pop(context); // Lukk drawer først
+                Navigator.pushReplacementNamed(context, route);
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? AppTheme.primaryGreen.withOpacity(0.1)
+                      : isHovered
+                          ? AppTheme.tertiaryGreen.withOpacity(0.1)
+                          : Colors.transparent,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      icon,
+                      color: isSelected || isHovered
+                          ? AppTheme.primaryGreen
+                          : Colors.grey.shade700,
+                      size: 24,
+                    ),
+                    const SizedBox(width: 24),
+                    Text(
+                      label,
+                      style: TextStyle(
+                        color: isSelected || isHovered
+                            ? AppTheme.primaryGreen
+                            : Colors.grey.shade800,
+                        fontSize: 16,
+                        fontWeight:
+                            isSelected ? FontWeight.w600 : FontWeight.w500,
+                      ),
+                    ),
+                    const Spacer(),
+                    if (isSelected)
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryGreen,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   State<NavigationMenu> createState() => _NavigationMenuState();
@@ -21,6 +216,7 @@ class NavigationMenu extends StatefulWidget {
 class _NavigationMenuState extends State<NavigationMenu>
     with SingleTickerProviderStateMixin {
   final Map<String, bool> _isHovered = {};
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _isVisible = true;
   ScrollController? _scrollController;
   double _lastScrollPos = 0;
@@ -69,6 +265,11 @@ class _NavigationMenuState extends State<NavigationMenu>
     }
   }
 
+  void _openDrawer(BuildContext context) {
+    // Bruk den mest oppdaterte måten å åpne drawer
+    Scaffold.maybeOf(context)?.openDrawer();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedSlide(
@@ -76,77 +277,53 @@ class _NavigationMenuState extends State<NavigationMenu>
       offset: Offset(0, _isVisible ? 0 : 1),
       child: FadeTransition(
         opacity: _fadeAnimation,
-        child: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              decoration: AppTheme.bottomNavDecoration,
-              child: Container(
-                height:
-                    60 + MediaQuery.of(context).padding.bottom, // Justert høyde
-                padding: EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                  bottom: MediaQuery.of(context).padding.bottom > 0 ? 8 : 0,
+        child: Builder(builder: (context) {
+          return Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.9),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, -5),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    if (widget.showBackButton)
-                      _buildBackButton()
-                    else
-                      const SizedBox(width: 40),
-                    const SizedBox(width: 24), // Økt mellomrom når hjemknappen vises
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: _buildNavItem(
-                              'Program',
-                              AppRoutes.program,
-                              Icons.event_note_outlined,
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: _buildNavItem(
-                              'Sted',
-                              AppRoutes.location,
-                              Icons.location_on_outlined,
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: _buildNavItem(
-                              'Info',
-                              AppRoutes.info,
-                              Icons.info_outline,
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: _buildNavItem(
-                              'RSVP',
-                              AppRoutes.rsvp,
-                              Icons.check_circle_outline,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 40),
-                  ],
-                ),
-              ),
+              ],
             ),
-          ),
-        ),
+            height: 60 + MediaQuery.of(context).padding.bottom,
+            padding: EdgeInsets.only(
+              left: 16,
+              right: 16,
+              bottom: MediaQuery.of(context).padding.bottom > 0 ? 8 : 0,
+              top: 8,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Hjem-ikon venstre side
+                _buildHomeButton(context),
+
+                // Tittel i midten
+                Text(
+                  'F & JM',
+                  style: TextStyle(
+                    color: AppTheme.primaryGreen,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+
+                // Burger-meny høyre side
+                _buildMenuButton(context),
+              ],
+            ),
+          );
+        }),
       ),
     );
   }
 
-  Widget _buildBackButton() {
+  Widget _buildHomeButton(BuildContext context) {
     return StatefulBuilder(
       builder: (context, setState) {
         final isHovered = _isHovered['home'] ?? false;
@@ -162,19 +339,13 @@ class _NavigationMenuState extends State<NavigationMenu>
             },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              width: 36,
-              height: 36,
+              width: 40,
+              height: 40,
               decoration: BoxDecoration(
                 color: isHovered
                     ? AppTheme.primaryGreen.withOpacity(0.15)
-                    : AppTheme.primaryGreen.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: isHovered
-                      ? AppTheme.primaryGreen.withOpacity(0.3)
-                      : Colors.transparent,
-                  width: 1.5,
-                ),
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
                 child: AnimatedScale(
@@ -183,7 +354,7 @@ class _NavigationMenuState extends State<NavigationMenu>
                   child: Icon(
                     Icons.home_outlined,
                     color: AppTheme.primaryGreen,
-                    size: 20,
+                    size: 24,
                   ),
                 ),
               ),
@@ -194,82 +365,39 @@ class _NavigationMenuState extends State<NavigationMenu>
     );
   }
 
-  Widget _buildNavItem(
-    String label,
-    String route,
-    IconData icon,
-  ) {
+  Widget _buildMenuButton(BuildContext context) {
     return StatefulBuilder(
       builder: (context, setState) {
-        final bool isHovered = _isHovered[route] ?? false;
-        final bool isSelected = ModalRoute.of(context)?.settings.name == route;
-        final bool isPressed = _isHovered[route + '_pressed'] ?? false;
+        final isHovered = _isHovered['menu'] ?? false;
 
         return MouseRegion(
-          onEnter: (_) => setState(() => _isHovered[route] = true),
-          onExit: (_) => setState(() {
-            _isHovered[route] = false;
-            _isHovered[route + '_pressed'] = false;
-          }),
+          onEnter: (_) => setState(() => _isHovered['menu'] = true),
+          onExit: (_) => setState(() => _isHovered['menu'] = false),
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
-            onTapDown: (_) =>
-                setState(() => _isHovered[route + '_pressed'] = true),
-            onTapUp: (_) =>
-                setState(() => _isHovered[route + '_pressed'] = false),
-            onTapCancel: () =>
-                setState(() => _isHovered[route + '_pressed'] = false),
             onTap: () {
               HapticFeedback.mediumImpact();
-              Navigator.pushReplacementNamed(context, route);
+              _openDrawer(context);
             },
-            child: Transform.scale(
-              scale: isPressed ? 0.95 : 1.0,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  color: isSelected
-                      ? AppTheme.primaryGreen.withOpacity(0.1)
-                      : (isHovered ? Colors.grey.shade50 : Colors.transparent),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: isSelected || isHovered
-                        ? AppTheme.primaryGreen.withOpacity(0.2)
-                        : Colors.transparent,
-                    width: 1.5,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: isHovered
+                    ? AppTheme.primaryGreen.withOpacity(0.15)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: AnimatedScale(
+                  duration: const Duration(milliseconds: 200),
+                  scale: isHovered ? 1.1 : 1.0,
+                  child: Icon(
+                    Icons.menu_rounded,
+                    color: AppTheme.primaryGreen,
+                    size: 24,
                   ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      icon,
-                      color: isSelected || isHovered
-                          ? AppTheme.primaryGreen
-                          : Colors.grey.shade600,
-                      size: 18,
-                    ),
-                    const SizedBox(width: 4),
-                    Flexible(
-                      child: Text(
-                        label,
-                        style: TextStyle(
-                          color: isSelected || isHovered
-                              ? AppTheme.primaryGreen
-                              : Colors.grey.shade600,
-                          fontSize: 13,
-                          fontWeight:
-                              isSelected ? FontWeight.w600 : FontWeight.w500,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        maxLines: 1,
-                      ),
-                    ),
-                  ],
                 ),
               ),
             ),
