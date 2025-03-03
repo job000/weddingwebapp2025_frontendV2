@@ -31,6 +31,13 @@
 
   <title>weddingwebapp2025</title>
   <link rel="manifest" href="manifest.json">
+
+  <script>
+    // Funksjon for å åpne URL i ny fane fra Flutter
+    window.openUrlExternally = function(url) {
+      window.open(url, '_blank');
+    };
+  </script>
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
