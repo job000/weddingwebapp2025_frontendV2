@@ -1,3 +1,5 @@
+import 'dart:ui';
+import 'dart:js' as js;
 import 'package:flutter/material.dart';
 import 'package:weddingwebapp2025/utils/app_theme.dart';
 import 'package:weddingwebapp2025/widgets/navigation_menu.dart';
@@ -7,6 +9,11 @@ class RSVPPage extends StatefulWidget {
 
   @override
   State<RSVPPage> createState() => _RSVPPageState();
+  
+  // Flutter web webview initialiseres via index.html
+  static void registerWebView() {
+    // Denne metoden er tom siden vi håndterer iframe via index.html
+  }
 }
 
 class _RSVPPageState extends State<RSVPPage>
@@ -15,13 +22,6 @@ class _RSVPPageState extends State<RSVPPage>
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
-
-  final _formKey = GlobalKey<FormState>();
-  bool _isAttending = true;
-  int _numberOfGuests = 1;
-  String? _dietaryRequirements;
-  bool _needsAccommodation = false;
-  bool _isSubmitting = false;
 
   @override
   void initState() {
@@ -69,22 +69,48 @@ class _RSVPPageState extends State<RSVPPage>
                 SliverAppBar(
                   pinned: true,
                   stretch: true,
-                  expandedHeight: 200,
+                  expandedHeight: 280,
                   backgroundColor: Colors.transparent,
-                  automaticallyImplyLeading: false, // Fjerner tilbake-knappen
+                  automaticallyImplyLeading: false,
                   flexibleSpace: FlexibleSpaceBar(
-                    title: const Text('RSVP'),
-                    background: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            AppTheme.primaryGreen.withOpacity(0.7),
-                            Colors.transparent,
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
+                    title: const Text('Svar på invitasjon'),
+                    titlePadding: const EdgeInsets.only(left: 24, bottom: 16),
+                    background: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Image.network(
+                          'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+                          fit: BoxFit.cover,
+                          colorBlendMode: BlendMode.darken,
+                          color: Colors.black.withOpacity(0.3),
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: AppTheme.primaryGreen.withOpacity(0.8),
+                              child: Center(
+                                child: Icon(
+                                  Icons.mail_outline,
+                                  color: Colors.white.withOpacity(0.8),
+                                  size: 72,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      ),
+                        Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.black.withOpacity(0.5),
+                                Colors.transparent,
+                                Colors.black.withOpacity(0.5),
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              stops: const [0.0, 0.5, 1.0],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -102,20 +128,34 @@ class _RSVPPageState extends State<RSVPPage>
                                 maxWidth: AppTheme.maxContentWidth,
                               ),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Vi håper du kommer!',
+                                    'Vi gleder oss til å feire med deg!',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .displaySmall
+                                        .headlineMedium
                                         ?.copyWith(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w300,
+                                          letterSpacing: 1.0,
                                         ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  Text(
+                                    'Vennligst svar innen 1. mai 2025',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                          color: Colors.white.withOpacity(0.9),
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                    textAlign: TextAlign.center,
                                   ),
                                   const SizedBox(height: 40),
-                                  _buildRSVPCard(),
+                                  _buildGoogleFormCard(),
                                 ],
                               ),
                             ),
@@ -132,344 +172,155 @@ class _RSVPPageState extends State<RSVPPage>
             left: 0,
             right: 0,
             bottom: 0,
-            child: NavigationMenu(),
+            child: NavigationMenu(showBackButton: true),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildRSVPCard() {
+  Widget _buildGoogleFormCard() {
     return Container(
       decoration: BoxDecoration(
         gradient: AppTheme.cardGradient,
         borderRadius: BorderRadius.circular(20),
         boxShadow: AppTheme.modernShadow,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildAttendanceSwitch(),
-              const SizedBox(height: 32),
-              if (_isAttending) ...[
-                _buildAnimatedSection(
-                  _buildGuestCounter(),
-                  delay: 0.2,
-                ),
-                const SizedBox(height: 32),
-                _buildAnimatedSection(
-                  _buildDietaryField(),
-                  delay: 0.3,
-                ),
-                const SizedBox(height: 32),
-                _buildAnimatedSection(
-                  _buildAccommodationField(),
-                  delay: 0.4,
-                ),
-                const SizedBox(height: 40),
-              ],
-              Center(child: _buildSubmitButton()),
-            ],
-          ),
+        border: Border.all(
+          color: Colors.white.withOpacity(0.6),
+          width: 1.5,
         ),
       ),
-    );
-  }
-
-  Widget _buildAnimatedSection(Widget child, {required double delay}) {
-    return SlideTransition(
-      position: Tween<Offset>(
-        begin: const Offset(0, 0.2),
-        end: Offset.zero,
-      ).animate(
-        CurvedAnimation(
-          parent: _controller,
-          curve: Interval(
-            delay,
-            delay + 0.3,
-            curve: Curves.easeOut,
-          ),
-        ),
-      ),
-      child: FadeTransition(
-        opacity: CurvedAnimation(
-          parent: _controller,
-          curve: Interval(
-            delay,
-            delay + 0.3,
-            curve: Curves.easeOut,
-          ),
-        ),
-        child: child,
-      ),
-    );
-  }
-
-  Widget _buildAttendanceSwitch() {
-    return Container(
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
+      padding: const EdgeInsets.all(32),
+      child: Column(
         children: [
-          Expanded(
-            child: _buildSwitchOption(
-              text: 'Jeg kommer',
-              isSelected: _isAttending,
-              onTap: () => setState(() => _isAttending = true),
+          Icon(
+            Icons.favorite,
+            size: 48,
+            color: AppTheme.primaryGreen,
+          ),
+          const SizedBox(height: 24),
+          Text(
+            'Meld din deltagelse',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: AppTheme.primaryGreen,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.5,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.white.withOpacity(0.5),
+              border: Border.all(
+                color: AppTheme.tertiaryGreen.withOpacity(0.3),
+                width: 1,
+              ),
+            ),
+            child: Column(
+              children: [
+                Text(
+                  'For å melde din deltakelse eller avbud, vennligst fyll ut skjemaet nedenfor. Her kan du også informere om eventuelle matallergier eller spesielle behov.',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Colors.black87,
+                        height: 1.6,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 32),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2369&q=80',
+                    height: 180,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        height: 180,
+                        color: AppTheme.tertiaryGreen.withOpacity(0.3),
+                        child: Center(
+                          child: Icon(
+                            Icons.image_not_supported_outlined,
+                            color: AppTheme.primaryGreen.withOpacity(0.5),
+                            size: 48,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 32),
+                ElevatedButton(
+                  onPressed: _openGoogleForm,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppTheme.primaryGreen,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40,
+                      vertical: 20,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      'Åpne svarskjema',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          Expanded(
-            child: _buildSwitchOption(
-              text: 'Kan dessverre ikke',
-              isSelected: !_isAttending,
-              onTap: () => setState(() => _isAttending = false),
-            ),
+          const SizedBox(height: 24),
+          Text(
+            'Har du spørsmål? Ta kontakt med oss direkte.',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Colors.black87,
+                ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Telefon: +47 407 64 816 / +47 456 72 291',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppTheme.secondaryGreen,
+                  fontWeight: FontWeight.w500,
+                ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
     );
   }
-
-  Widget _buildSwitchOption({
-    required String text,
-    required bool isSelected,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeOutCubic,
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(
-          color: isSelected ? AppTheme.primaryGreen : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
+  
+  // Åpner Google Forms i en ny fane
+  void _openGoogleForm() {
+    final url = 'https://docs.google.com/forms/d/e/1FAIpQLSdvWStQt2a_1kMonK9OOMeNMV4g32Et3hw3sXWXcdXDDkATHQ/viewform';
+    try {
+      _openUrlInNewTab(url);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Kunne ikke åpne skjemaet. Prøv å kopiere URL-en manuelt.'),
+          backgroundColor: Colors.red.shade700,
         ),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.black87,
-            fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
+      );
+    }
   }
-
-  Widget _buildGuestCounter() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Antall gjester',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: AppTheme.primaryGreen,
-              ),
-        ),
-        const SizedBox(height: 16),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildCounterButton(
-              icon: Icons.remove,
-              onTap: _numberOfGuests > 1
-                  ? () => setState(() => _numberOfGuests--)
-                  : null,
-            ),
-            Container(
-              width: 80,
-              alignment: Alignment.center,
-              child: Text(
-                _numberOfGuests.toString(),
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: AppTheme.primaryGreen,
-                      fontWeight: FontWeight.w500,
-                    ),
-              ),
-            ),
-            _buildCounterButton(
-              icon: Icons.add,
-              onTap: _numberOfGuests < 10
-                  ? () => setState(() => _numberOfGuests++)
-                  : null,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCounterButton({
-    required IconData icon,
-    VoidCallback? onTap,
-  }) {
-    final isEnabled = onTap != null;
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: isEnabled
-              ? AppTheme.primaryGreen.withOpacity(0.1)
-              : Colors.grey.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Icon(
-          icon,
-          color: isEnabled ? AppTheme.primaryGreen : Colors.grey,
-          size: 24,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDietaryField() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Allergier eller diettbehov?',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: AppTheme.primaryGreen,
-              ),
-        ),
-        const SizedBox(height: 16),
-        TextFormField(
-          decoration: InputDecoration(
-            hintText: 'Fortell oss om eventuelle matallergier...',
-            filled: true,
-            fillColor: Colors.white,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Colors.grey.shade200,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: AppTheme.primaryGreen,
-              ),
-            ),
-          ),
-          maxLines: 3,
-          onChanged: (value) => _dietaryRequirements = value,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildAccommodationField() {
-    return Row(
-      children: [
-        SizedBox(
-          height: 24,
-          width: 24,
-          child: Transform.scale(
-            scale: 1.2,
-            child: Checkbox(
-              value: _needsAccommodation,
-              onChanged: (value) =>
-                  setState(() => _needsAccommodation = value!),
-              activeColor: AppTheme.primaryGreen,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Text(
-          'Jeg trenger overnatting',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Colors.black87,
-              ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSubmitButton() {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-      height: 56,
-      width: _isSubmitting ? 56 : 200,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppTheme.primaryGreen,
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(_isSubmitting ? 28 : 12),
-          ),
-          padding: EdgeInsets.zero,
-          elevation: 0,
-        ),
-        onPressed: _handleSubmit,
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: _isSubmitting
-              ? const SizedBox(
-                  height: 24,
-                  width: 24,
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                    strokeWidth: 2,
-                  ),
-                )
-              : Text(
-                  _isAttending ? 'Send påmelding' : 'Send avbud',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-        ),
-      ),
-    );
-  }
-
-  Future<void> _handleSubmit() async {
-    if (!_formKey.currentState!.validate()) return;
-
-    setState(() => _isSubmitting = true);
-
-    // Simuler en nettverksforsinkelse
-    await Future.delayed(const Duration(seconds: 2));
-
-    // Her ville vi normalt sende dataene til en server
-    print('Form submitted with dietary requirements: $_dietaryRequirements');
-
-    setState(() => _isSubmitting = false);
-
-    if (!mounted) return;
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          _isAttending
-              ? 'Takk for påmeldingen!'
-              : 'Takk for beskjeden, vi beklager at du ikke kan komme.',
-        ),
-        backgroundColor: AppTheme.primaryGreen,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-    );
+  
+  // Bruker JavaScript til å åpne en URL i en ny fane
+  void _openUrlInNewTab(String url) {
+    // Kaller JavaScript-funksjonen som er definert i index.html
+    js.context.callMethod('openUrlExternally', [url]);
   }
 }

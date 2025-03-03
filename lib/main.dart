@@ -1,9 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:weddingwebapp2025/screens/rsvp_page.dart';
 import 'package:weddingwebapp2025/utils/app_routes.dart';
 import 'package:weddingwebapp2025/utils/app_theme.dart';
 
 void main() {
+  // Registrerer webview for Google Forms iframe
+  RSVPPage.registerWebView();
+
   runApp(const WeddingApp());
 }
 

@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage>
                     _buildAnimatedCard(
                       _cardAnimations[1],
                       'Vielse',
-                      '27. juni 2025, kl. 11:00',
+                      '27. juni 2025, kl. 13:00',
                       'Intim seremoni for nær familie',
                       Icons.favorite,
                     ),
@@ -225,7 +225,7 @@ class _HomePageState extends State<HomePage>
                     _buildAnimatedCard(
                       _cardAnimations[2],
                       'Bryllupsfest',
-                      '28. juni 2025, kl. 15:00',
+                      '28. juni 2025, kl. 17:00',
                       'Bestemorstua, Bodø',
                       Icons.celebration,
                     ),

@@ -203,7 +203,7 @@ class _InfoPageState extends State<InfoPage>
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Vi har reservert rom på Comfort Hotel Bodø for gjester. Bruk koden "KODEKOMMERHER" ved bestilling for å få rabatt. Booking må gjøres før 1. mai 2025 for å benytte rabatten.',
+                  'Vi har undersøkt overnattingsmuligheter på Comfort Hotel Bodø. De tilbyr rom til våre gjester med følgende priser:\n\n• Dobbeltrom: 1299,- NOK per natt\n• Enkeltrom: 1099,- NOK per natt\n\nVi er også i dialog med Scandic Havet og andre hoteller i området for å sikre flere alternativer. Mer informasjon kommer så snart det er klart.',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Colors.black87,
                         height: 1.6,
@@ -410,7 +410,7 @@ class _InfoPageState extends State<InfoPage>
         ),
         _buildInfoCard(
           'Antrekk',
-          'Pent antrekk. Menn kan bruke dress eller pent antrekk, damer kjole eller pent antrekk.',
+          'Vi ønsker at dere skal ha på dere det dere er komfortable i og føler dere fine i. Det viktigste er at vi alle koser oss sammen på denne spesielle dagen.',
           Icons.checkroom_outlined,
         ),
         const SizedBox(height: 16),
@@ -478,7 +478,7 @@ class _InfoPageState extends State<InfoPage>
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  '', //TODO: LEGG TIL TEKST HER
+                  '', //TODO: Add gift information
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Colors.black87,
                         height: 1.6,

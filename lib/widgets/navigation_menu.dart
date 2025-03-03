@@ -124,6 +124,14 @@ class _NavigationMenuState extends State<NavigationMenu>
                               Icons.info_outline,
                             ),
                           ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: _buildNavItem(
+                              'RSVP',
+                              AppRoutes.rsvp,
+                              Icons.check_circle_outline,
+                            ),
+                          ),
                         ],
                       ),
                     ),

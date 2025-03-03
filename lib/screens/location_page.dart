@@ -185,7 +185,7 @@ class _LocationPageState extends State<LocationPage>
                       ),
                       const SizedBox(height: 20),
                       Text(
-                        'Bestemorstua er et vakkert lokale med sjarmerende atmosfære og nydelig utsikt. Det er god plass til både middag og dans utover kvelden.',
+                        'Bestemorstua er klubbhuset til Innstrandens Idrettslag, hovedsakelig skigruppa, og ligger ved Bestemorenga, i Bodø. Huset fungerer som kafé- og konferanselokaler. Det er god plass til både middag og dans utover kvelden.',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               color: Colors.black87,
                               height: 1.6,
@@ -266,7 +266,7 @@ class _LocationPageState extends State<LocationPage>
                 const SizedBox(height: 16),
                 _buildTransportCard(
                   'Shuttle Service',
-                  'Det vil bli organisert transport fra Bestemorstua til hoteller i Bodø for gjestene. Mer informasjon kommer.',
+                  'Mer informasjon kommer.',
                   Icons.directions_bus,
                 ),
               ],
