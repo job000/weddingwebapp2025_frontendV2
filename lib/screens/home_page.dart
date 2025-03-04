@@ -79,7 +79,8 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Fjerner drawer-referansen siden vi håndterer navigasjon med navigation_menu
+      drawer:
+          NavigationMenu.buildDrawer(context), // Bruker statisk drawer-metode
       body: Stack(
         children: [
           CustomScrollView(
