@@ -65967,7 +65967,7 @@ k=A.ea(A.a([j,B.bd,A.bg("Toastmaster",k==null?c:k.fi(B.f,B.aB),c)],s),B.J,B.A,B.
 j=d.c
 j.toString
 j=A.a_(j).p2.y
-j=A.bg("V\xe5r toastmaster for bryllupet er John Doe. Ta gjerne kontakt med ham om du har sp\xf8rsm\xe5l, \xf8nsker \xe5 holde tale, eller har andre bidrag til festen.",j==null?c:j.ie(B.y,1.6),c)
+j=A.bg("Mer informasjon kommer snart. Vi gleder oss til \xe5 presentere toastmasteren for kvelden!",j==null?c:j.ie(B.y,1.6),c)
 i=A.a4(13,B.f.gl(0)>>>16&255,B.f.gl(0)>>>8&255,B.f.gl(0)&255)
 h=A.bA(12)
 g=A.Rd(A.a4(51,B.f.gl(0)>>>16&255,B.f.gl(0)>>>8&255,B.f.gl(0)&255),1)

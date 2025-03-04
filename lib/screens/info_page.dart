@@ -353,7 +353,7 @@ class _InfoPageState extends State<InfoPage>
             ),
             const SizedBox(height: 20),
             Text(
-              'Vår toastmaster for bryllupet er John Doe. Ta gjerne kontakt med ham om du har spørsmål, ønsker å holde tale, eller har andre bidrag til festen.',
+              'Mer informasjon kommer snart. Vi gleder oss til å presentere toastmasteren for kvelden!', //Vår toastmaster for bryllupet er John Doe. Ta gjerne kontakt med ham om du har spørsmål, ønsker å holde tale, eller har andre bidrag til festen.
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Colors.black87,
                     height: 1.6,
