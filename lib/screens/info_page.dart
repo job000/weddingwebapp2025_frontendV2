@@ -112,8 +112,6 @@ class _InfoPageState extends State<InfoPage>
                                 const SizedBox(height: 40),
                                 _buildToastmasterCard(),
                                 const SizedBox(height: 40),
-                                _buildDressCodeSection(),
-                                const SizedBox(height: 40),
                                 _buildGiftsCard(),
                                 const SizedBox(height: 40),
                                 _buildAllergiesCard(),
@@ -204,7 +202,7 @@ class _InfoPageState extends State<InfoPage>
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Vi har undersøkt overnattingsmuligheter på Comfort Hotel Bodø. De tilbyr rom til våre gjester med følgende priser:\n\n• Dobbeltrom: 1299,- NOK per natt\n• Enkeltrom: 1099,- NOK per natt\n\nVi er også i dialog med Scandic Havet og andre hoteller i området for å sikre flere alternativer. Mer informasjon kommer så snart det er klart.',
+                  'Brudeparet kommer til å bo på hotell under bryllupshelgen. Vi er i dialog med flere hoteller for å undersøke muligheten for rabatterte priser for våre gjester. Mer informasjon kommer.',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Colors.black87,
                         height: 1.6,
@@ -234,7 +232,7 @@ class _InfoPageState extends State<InfoPage>
                           const SizedBox(width: 12),
                           Expanded(
                             child: Text(
-                              'Kontakt hotellet direkte på tlf: +47 755 50 900 eller e-post: co.bodo@choice.no',
+                              'Mer informasjon kommer.', //'Kontakt hotellet direkte på tlf: +47 755 50 900 eller e-post: co.bodo@choice.no',
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium
@@ -353,7 +351,7 @@ class _InfoPageState extends State<InfoPage>
             ),
             const SizedBox(height: 20),
             Text(
-              'Mer informasjon kommer snart. Vi gleder oss til å presentere toastmasteren for kvelden!', //Vår toastmaster for bryllupet er John Doe. Ta gjerne kontakt med ham om du har spørsmål, ønsker å holde tale, eller har andre bidrag til festen.
+              'Mer informasjon kommer snart.', //Vår toastmaster for bryllupet er John Doe. Ta gjerne kontakt med ham om du har spørsmål, ønsker å holde tale, eller har andre bidrag til festen.
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Colors.black87,
                     height: 1.6,
@@ -392,35 +390,6 @@ class _InfoPageState extends State<InfoPage>
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildDressCodeSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 12, bottom: 24),
-          child: Text(
-            'Dresscode',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                ),
-          ),
-        ),
-        _buildInfoCard(
-          'Antrekk',
-          'Vi ønsker at dere skal ha på dere det dere er komfortable i og føler dere fine i. Det viktigste er at vi alle koser oss sammen på denne spesielle dagen.',
-          Icons.checkroom_outlined,
-        ),
-        const SizedBox(height: 16),
-        _buildInfoCard(
-          'Tips',
-          'Været i Bodø kan være uforutsigbart. Ta med en lett jakke eller sjal til kveldsbruk, selv om det er sommer.',
-          Icons.wb_sunny_outlined,
-        ),
-      ],
     );
   }
 
@@ -469,7 +438,7 @@ class _InfoPageState extends State<InfoPage>
                     ),
                     const SizedBox(width: 16),
                     Text(
-                      'Gaver',
+                      'Ønskeliste',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             color: AppTheme.primaryGreen,
                             fontWeight: FontWeight.w600,
@@ -479,7 +448,7 @@ class _InfoPageState extends State<InfoPage>
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  '', //TODO: Add gift information
+                  'Ønskeliste kommer.', //TODO: Add gift information
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Colors.black87,
                         height: 1.6,
@@ -521,7 +490,7 @@ class _InfoPageState extends State<InfoPage>
                 ),
                 const SizedBox(width: 16),
                 Text(
-                  'Allergier',
+                  'Smakfullt og grønt',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: AppTheme.primaryGreen,
                         fontWeight: FontWeight.w600,
@@ -531,7 +500,7 @@ class _InfoPageState extends State<InfoPage>
             ),
             const SizedBox(height: 20),
             Text(
-              'Vennligst oppgi eventuelle matallergier eller spesielle diettbehov når du svarer på invitasjonen. Middagen vil være vegetarisk, og vi ønsker at alle skal kunne nyte maten under festen.',
+              'Maten som serveres i bryllupet vil være vegetarisk. Vi håper dere vil like de spennende og smakfulle rettene vi har valgt ut! Har du noen allergier eller spesielle behov, gi oss gjerne beskjed i svarskjemaet.',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Colors.black87,
                     height: 1.6,

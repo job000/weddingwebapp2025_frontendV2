@@ -145,7 +145,7 @@ class _RSVPPageState extends State<RSVPPage>
                                   ),
                                   const SizedBox(height: 16),
                                   Text(
-                                    'Vennligst svar innen 1. mai 2025',
+                                    'Vennligst svar innen 15. mai 2025',
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleMedium
@@ -224,7 +224,7 @@ class _RSVPPageState extends State<RSVPPage>
             child: Column(
               children: [
                 Text(
-                  'For å melde din deltakelse eller avbud, vennligst fyll ut skjemaet nedenfor. Her kan du også informere om eventuelle matallergier eller spesielle behov.',
+                  'Gi oss beskjed om du kommer eller ikke ved å fylle ut skjemaet nedenfor. Her kan du også informere om eventuelle matallergier eller spesielle behov.',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Colors.black87,
                         height: 1.6,

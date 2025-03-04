@@ -17,9 +17,9 @@ class _HomePageState extends State<HomePage>
   late AnimationController _animationController;
   late List<Animation<double>> _cardAnimations;
 
-  // Bilder for slideshow - oppdatert med faktiske bilder
+  // Bilder for slideshow - oppdatert med bryllupsrelaterte bakgrunnsbilder uten personer
   final List<String> _backgroundImages = [
-    'assets/images/wedding_background.jpg'
+    'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3270&q=80', // Dekorasjonsdetaljer
   ];
 
   int _currentImageIndex = 0;
@@ -78,9 +78,10 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
-      drawer:
-          NavigationMenu.buildDrawer(context), // Bruker statisk drawer-metode
+      drawer: NavigationMenu.buildDrawer(context),
       body: Stack(
         children: [
           CustomScrollView(
@@ -88,7 +89,8 @@ class _HomePageState extends State<HomePage>
             physics: const BouncingScrollPhysics(),
             slivers: [
               SliverAppBar(
-                expandedHeight: MediaQuery.of(context).size.height * 0.6,
+                expandedHeight: MediaQuery.of(context).size.height *
+                    0.7, // Gjør bildet høyere
                 pinned: true,
                 stretch: true,
                 backgroundColor: Colors.transparent,
@@ -97,109 +99,97 @@ class _HomePageState extends State<HomePage>
                   builder: (BuildContext context, BoxConstraints constraints) {
                     final double percent =
                         (constraints.maxHeight - kToolbarHeight) /
-                            (MediaQuery.of(context).size.height * 0.6 -
+                            (MediaQuery.of(context).size.height * 0.7 -
                                 kToolbarHeight);
 
                     return FlexibleSpaceBar(
                       stretchModes: const [
                         StretchMode.zoomBackground,
-                        StretchMode.blurBackground,
                       ],
-                      titlePadding: EdgeInsets.zero,
-                      title: Container(
-                        width: double.infinity,
-                        color: percent < 0.5
-                            ? Colors.black.withOpacity(0.3)
-                            : Colors.transparent,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 16,
-                          ),
-                          child: Text(
-                            'Frida & John Michael',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w300,
-                              letterSpacing: 1.2,
-                              fontSize: percent > 0.6 ? 24 : 20,
-                              shadows: [
-                                Shadow(
-                                  color: Colors.black.withOpacity(0.5),
-                                  offset: const Offset(0, 2),
-                                  blurRadius: 4,
-                                ),
-                              ],
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
                       background: Stack(
                         fit: StackFit.expand,
                         children: [
-                          ColoredBox(
-                            color: AppTheme.primaryGreen.withOpacity(0.8),
-                            child: AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 1000),
-                              transitionBuilder:
-                                  (Widget child, Animation<double> animation) {
-                                return FadeTransition(
-                                    opacity: animation, child: child);
+                          // Container med fargebakgrunn som fallback
+                          Container(color: Colors.white),
+
+                          // Bakgrunnsbilde som dekker hele bredden
+                          FadeTransition(
+                            opacity: const AlwaysStoppedAnimation(1.0),
+                            child: Image.network(
+                              _backgroundImages[_currentImageIndex],
+                              fit: BoxFit.cover,
+                              alignment: Alignment.center,
+                              width: screenSize.width,
+                              height: screenSize.height * 0.7,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  color: Colors.white,
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.image_not_supported,
+                                      color: Colors.grey,
+                                      size: 64,
+                                    ),
+                                  ),
+                                );
                               },
-                              child: Image.asset(
-                                _backgroundImages[_currentImageIndex],
-                                key: ValueKey<int>(_currentImageIndex),
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) {
-                                  // Fallback til nettverksbilde hvis det lokale bildet ikke lastes
-                                  return Image.network(
-                                    'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2274&q=80',
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return const Center(
-                                        child: Icon(
-                                          Icons.favorite,
-                                          color: Colors.white,
-                                          size: 64,
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
                             ),
                           ),
-                          DecoratedBox(
+
+                          // Mørkt overlay for bedre tekstlesbarhet
+                          Container(
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [
-                                  Colors.black.withOpacity(0.7),
-                                  Colors.transparent,
+                                  Colors.black.withOpacity(0.3),
+                                  Colors.black.withOpacity(0.5),
                                   Colors.black.withOpacity(0.7),
                                 ],
-                                stops: const [0.0, 0.5, 1.0],
+                                stops: const [0.0, 0.5, 0.9],
                               ),
                             ),
                           ),
+
+                          // Innhold over bildet
                           Positioned(
-                            top: MediaQuery.of(context).size.height * 0.25,
+                            bottom: 60,
                             left: 0,
                             right: 0,
-                            child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
-                              opacity: percent > 0.5 ? 1.0 : 0.0,
-                              child: const Text(
-                                '27. - 28. juni 2025',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w300,
-                                  letterSpacing: 1.2,
-                                ),
-                                textAlign: TextAlign.center,
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 24),
+                              child: Column(
+                                children: [
+                                  const Text(
+                                    'Frida & John Michael',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 34,
+                                      fontWeight: FontWeight.w300,
+                                      letterSpacing: 1.5,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  const Text(
+                                    '27. - 28. juni 2025',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w400,
+                                      letterSpacing: 1.0,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 30),
+                                  Container(
+                                    height: 2,
+                                    width: 60,
+                                    color: Colors.white.withOpacity(0.7),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -220,8 +210,16 @@ class _HomePageState extends State<HomePage>
                       _cardAnimations[1],
                       'Vielse',
                       '27. juni 2025, kl. 13:00',
-                      'Intim seremoni for nær familie',
+                      'Intim seremoni for nær familie.',
                       Icons.favorite,
+                    ),
+                    const SizedBox(height: 24),
+                    _buildAnimatedCard(
+                      _cardAnimations[2],
+                      'Sosial sammenkomst',
+                      '27. juni 2025, kl. 18:00',
+                      'Vi planlegger en sosial sammenkomst for de som ønsker. Mer informasjon om dette kommer.',
+                      Icons.people,
                     ),
                     const SizedBox(height: 24),
                     _buildAnimatedCard(
