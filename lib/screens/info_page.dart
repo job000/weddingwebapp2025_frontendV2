@@ -380,7 +380,7 @@ class _InfoPageState extends State<InfoPage>
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      'John kan nås på telefon: +47 123 45 678 eller e-post: toastmaster@example.com',
+                      'XYZ kan nås på telefon: +47 123 45 678 eller e-post: toastmaster@example.com',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Colors.black87,
                           ),
