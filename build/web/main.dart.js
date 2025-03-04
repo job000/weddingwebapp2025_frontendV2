@@ -65975,7 +65975,7 @@ f=A.dG(B.As,B.f,c,20)
 e=d.c
 e.toString
 e=A.a_(e).p2.z
-n=A.b7(c,new A.cl(B.cf,A.cu(A.a([k,B.dG,j,B.be,A.b7(c,A.ea(A.a([f,B.iq,A.m6(A.bg("John kan n\xe5s p\xe5 telefon: +47 123 45 678 eller e-post: toastmaster@example.com",e==null?c:e.dD(B.y),c),1)],s),B.J,B.A,B.ab),B.m,c,c,new A.b5(i,c,g,h,c,c,B.v),c,c,c,B.d2,c,c,c)],s),B.a3,B.A),c),B.m,c,c,new A.b5(c,c,c,n,m,o,B.v),c,c,c,c,c,c,c)
+n=A.b7(c,new A.cl(B.cf,A.cu(A.a([k,B.dG,j,B.be,A.b7(c,A.ea(A.a([f,B.iq,A.m6(A.bg("XYZ kan n\xe5s p\xe5 telefon: +47 123 45 678 eller e-post: toastmaster@example.com",e==null?c:e.dD(B.y),c),1)],s),B.J,B.A,B.ab),B.m,c,c,new A.b5(i,c,g,h,c,c,B.v),c,c,c,B.d2,c,c,c)],s),B.a3,B.A),c),B.m,c,c,new A.b5(c,c,c,n,m,o,B.v),c,c,c,c,c,c,c)
 k=d.c
 k.toString
 k=A.a_(k).p2.f
