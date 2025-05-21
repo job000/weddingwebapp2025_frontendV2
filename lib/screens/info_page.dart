@@ -110,8 +110,8 @@ class _InfoPageState extends State<InfoPage>
                               children: [
                                 _buildAccommodationCard(),
                                 const SizedBox(height: 40),
-                                _buildToastmasterCard(),
-                                const SizedBox(height: 40),
+                                //_buildToastmasterCard(),
+                                //const SizedBox(height: 40),
                                 _buildGiftsCard(),
                                 const SizedBox(height: 40),
                                 _buildAllergiesCard(),
@@ -138,8 +138,10 @@ class _InfoPageState extends State<InfoPage>
   }
 
   Widget _buildAccommodationCard() {
-    final hotelUrl = Uri.parse(
-        'https://www.strawberry.no/hotell/norge/bodo/comfort-hotel-bodo/');
+    final hotelSiteUrl = Uri.parse(
+        'https://www.strawberry.no/hotell/norge/bodo/quality-hotel-ramsalt/');
+    final hotelBookingUrl = Uri.parse(
+        'https://app.mews.com/distributor/a82da28f-aef5-4153-9fe7-b11e00dacc57?mewsAvailabilityBlockId=c3b9855a-f0d2-4bbb-b304-b2d4009dba90&mewsStart=2025-06-26&mewsEnd=2025-06-29');
 
     return Container(
       decoration: BoxDecoration(
@@ -152,23 +154,10 @@ class _InfoPageState extends State<InfoPage>
           ClipRRect(
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             child: Image.network(
-              'https://images.squarespace-cdn.com/content/v1/63eb4a8a6b16144d7af2f6db/17575a56-ec1b-4604-8d46-11c71a937611/Comfort+Hotel+Bod%C3%B8.png?format=1000w',
+              'https://www.strawberry.no/globalassets/global/hotel-pictures/quality-hotel/quality-hotel-ramsalt/rooms/superior/superior-room-bed-quality-hotel-ramsalt.jpg?t=SmartScale%7C1024x570',
               height: 200,
               width: double.infinity,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  height: 150,
-                  color: AppTheme.primaryGreen.withOpacity(0.2),
-                  child: const Center(
-                    child: Icon(
-                      Icons.hotel_outlined,
-                      color: Colors.white,
-                      size: 48,
-                    ),
-                  ),
-                );
-              },
             ),
           ),
           Padding(
@@ -201,108 +190,83 @@ class _InfoPageState extends State<InfoPage>
                   ],
                 ),
                 const SizedBox(height: 20),
-                Text(
-                  'Brudeparet kommer til å bo på hotell under bryllupshelgen. Vi er i dialog med flere hoteller for å undersøke muligheten for rabatterte priser for våre gjester. Mer informasjon kommer.',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.black87,
-                        height: 1.6,
-                      ),
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppTheme.primaryGreen.withOpacity(0.05),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: AppTheme.primaryGreen.withOpacity(0.2),
-                      width: 1,
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.info_outline,
-                            color: AppTheme.primaryGreen,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Text(
-                              'Mer informasjon kommer.', //'Kontakt hotellet direkte på tlf: +47 755 50 900 eller e-post: co.bodo@choice.no',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(
-                                    color: Colors.black87,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      InkWell(
-                        onTap: () async {
-                          if (!await launchUrl(hotelUrl,
-                              mode: LaunchMode.externalApplication)) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Kunne ikke åpne nettsiden'),
-                                backgroundColor: Colors.red.shade700,
-                              ),
-                            );
-                          }
-                        },
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.link,
-                              color: AppTheme.primaryGreen,
-                              size: 20,
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Text(
-                                'Besøk hotellets nettside for mer informasjon',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      color: AppTheme.primaryGreen,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                              ),
-                            ),
-                          ],
+                RichText(
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Colors.black87,
+                          height: 1.6,
                         ),
+                    children: const [
+                      TextSpan(text: 'Vi har reservert hotellrom på '),
+                      TextSpan(
+                        text: 'Quality Hotel Ramsalt',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(height: 8),
-                      GestureDetector(
-                        onTap: () async {
-                          if (!await launchUrl(hotelUrl,
-                              mode: LaunchMode.externalApplication)) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Kunne ikke åpne nettsiden'),
-                                backgroundColor: Colors.red.shade700,
-                              ),
-                            );
-                          }
-                        },
-                        child: Text(
-                          'https://www.strawberry.no/hotell/norge/bodo/comfort-hotel-bodo/',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: AppTheme.primaryGreen,
-                                    fontStyle: FontStyle.italic,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                        ),
+                      TextSpan(
+                          text:
+                              ' i Bodø. Rommene er tilgjengelige for booking frem til og med '),
+                      TextSpan(
+                        text: '27. mai 2025.\n\n',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(text: 'Pris per natt (inkl. MVA):\n'),
+                      TextSpan(
+                        text: '• Enkeltrom: kr 1 190\n',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: '• Dobbeltrom: kr 1 390\n\n',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
+                  ),
+                ),
+                InkWell(
+                  onTap: () async {
+                    if (!await launchUrl(hotelBookingUrl,
+                        mode: LaunchMode.externalApplication)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Kunne ikke åpne bookingsiden'),
+                          backgroundColor: Colors.red.shade700,
+                        ),
+                      );
+                    }
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.link, color: AppTheme.primaryGreen),
+                      const SizedBox(width: 12),
+                      Text(
+                        'Trykk her for å booke rom direkte',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppTheme.primaryGreen,
+                              decoration: TextDecoration.underline,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                InkWell(
+                  onTap: () async {
+                    if (!await launchUrl(hotelSiteUrl,
+                        mode: LaunchMode.externalApplication)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Kunne ikke åpne hotellets nettside'),
+                          backgroundColor: Colors.red.shade700,
+                        ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    hotelSiteUrl.toString(),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: AppTheme.primaryGreen,
+                          fontStyle: FontStyle.italic,
+                          decoration: TextDecoration.underline,
+                        ),
                   ),
                 ),
               ],
@@ -313,6 +277,7 @@ class _InfoPageState extends State<InfoPage>
     );
   }
 
+/*
   Widget _buildToastmasterCard() {
     return Container(
       decoration: BoxDecoration(
@@ -392,8 +357,12 @@ class _InfoPageState extends State<InfoPage>
       ),
     );
   }
+*/
 
   Widget _buildGiftsCard() {
+    final giftListUrl =
+        Uri.parse('https://www.onskelister.no/liste?id=CkHAEdCSFk7NpeWGU6rf');
+
     return Container(
       decoration: BoxDecoration(
         gradient: AppTheme.cardGradient,
@@ -405,16 +374,10 @@ class _InfoPageState extends State<InfoPage>
           ClipRRect(
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             child: Image.network(
-              'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2040&q=80',
+              'https://cdn.thewirecutter.com/wp-content/uploads/2019/06/weddingregistry-2x1-689126828.jpg?width=2048&quality=75&auto=webp',
               height: 150,
               width: double.infinity,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  height: 150,
-                  color: AppTheme.primaryGreen.withOpacity(0.2),
-                );
-              },
             ),
           ),
           Padding(
@@ -448,11 +411,38 @@ class _InfoPageState extends State<InfoPage>
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Ønskeliste kommer.', //TODO: Add gift information
+                  'Link til ønskeliste:',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Colors.black87,
                         height: 1.6,
                       ),
+                ),
+                const SizedBox(height: 12),
+                InkWell(
+                  onTap: () async {
+                    if (!await launchUrl(giftListUrl,
+                        mode: LaunchMode.externalApplication)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Kunne ikke åpne ønskelisten'),
+                          backgroundColor: Colors.red.shade700,
+                        ),
+                      );
+                    }
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.link, color: AppTheme.primaryGreen),
+                      const SizedBox(width: 12),
+                      Text(
+                        'Se ønskeliste på onskelister.no',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppTheme.primaryGreen,
+                              decoration: TextDecoration.underline,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

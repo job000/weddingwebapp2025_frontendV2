@@ -110,6 +110,12 @@ class NavigationMenu extends StatefulWidget {
               AppRoutes.rsvp,
               Icons.check_circle_outline,
             ),
+            _buildDrawerItem(
+              context,
+              'Bildegalleri',
+              AppRoutes.gallery,
+              Icons.photo_library_outlined,
+            ),
 
             const Spacer(),
 
