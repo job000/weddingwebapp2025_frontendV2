@@ -355,7 +355,7 @@ ayo(){var s,r=A.dn().b
 if(r==null)s=null
 else{r=r.canvasKitVariant
 if(r==null)r=null
-s=r}r=A.aAD(A.atc(B.D8,s==null?"auto":s))
+s=r}r=A.aAD(A.atc(B.D7,s==null?"auto":s))
 return new A.at(r,new A.ada(),A.a3(r).h("at<1,r>"))},
 azT(a,b){return b+a},
 QO(){var s=0,r=A.Q(t.e),q,p,o,n,m
@@ -1031,7 +1031,7 @@ n.m()
 a.m()
 return m},
 aAm(a){var s,r,q,p,o,n,m
-$label0$0:for(s=a.length,r=0;r<6;++r){q=B.D9[r]
+$label0$0:for(s=a.length,r=0;r<6;++r){q=B.D8[r]
 p=q.c
 o=p.length
 if(s<o)continue $label0$0
@@ -41121,7 +41121,7 @@ A.D1.prototype={
 Jw(a,b,c,d,e,f){return A.asp(a,b,c,d,e,f)}}
 A.FG.prototype={
 T0(a){var s=t.Tr
-return A.a4(new A.at(B.Db,new A.a0x(a),s),!0,s.h("aM.E"))},
+return A.a4(new A.at(B.Da,new A.a0x(a),s),!0,s.h("aM.E"))},
 i(a,b){if(b==null)return!1
 if(this===b)return!0
 if(J.M(b)!==A.u(this))return!1
@@ -67501,7 +67501,7 @@ g=A.eI(A.a([f,B.c4,A.bo("Overnatting",g==null?n:g.hI(B.i,B.aF),n)],s),B.G,B.z,B.
 f=o.c
 f.toString
 f=A.a_(f).p2.y
-f=A.a2m(n,n,n,B.bz,n,n,!0,n,A.qn(B.D7,f==null?n:f.kw(B.B,1.6),n),B.aL,n,n,B.au,B.az)
+f=A.a2m(n,n,n,B.bz,n,n,!0,n,A.qn(B.Df,f==null?n:f.kw(B.B,1.6),n),B.aL,n,n,B.au,B.az)
 r=A.dJ(B.kz,B.i,n,n)
 q=o.c
 q.toString
@@ -70772,19 +70772,10 @@ B.hL=new A.fe(7,"functionModifier")
 B.q5=new A.fe(8,"symbolModifier")
 B.kZ=A.a(s([B.ct,B.cu,B.cv,B.cw,B.hI,B.hJ,B.hK,B.hL,B.q5]),A.as("y<fe>"))
 B.D6=A.a(s([0,0.5,0.9]),t.n)
-B.JX=new A.fl("Vi har reservert hotellrom p\xe5 ",null,B.aA,null)
-B.dL=new A.k(!0,null,null,null,null,null,null,B.bO,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.JT=new A.fl("Quality Hotel Ramsalt",null,B.aA,B.dL)
-B.JS=new A.fl(" i Bod\xf8. Rommene er tilgjengelige for booking frem til og med ",null,B.aA,null)
-B.JU=new A.fl("27. mai 2025.\n\n",null,B.aA,B.dL)
-B.JV=new A.fl("Pris per natt (inkl. MVA):\n",null,B.aA,null)
-B.JR=new A.fl("\u2022 Enkeltrom: kr 1 190\n",null,B.aA,B.dL)
-B.JW=new A.fl("\u2022 Dobbeltrom: kr 1 390\n\n",null,B.aA,B.dL)
-B.D7=A.a(s([B.JX,B.JT,B.JS,B.JU,B.JV,B.JR,B.JW]),t.VO)
 B.yh=new A.oF(0,"auto")
 B.yi=new A.oF(1,"full")
 B.yj=new A.oF(2,"chromium")
-B.D8=A.a(s([B.yh,B.yi,B.yj]),A.as("y<oF>"))
+B.D7=A.a(s([B.yh,B.yi,B.yj]),A.as("y<oF>"))
 B.CI=A.a(s([137,80,78,71,13,10,26,10]),t.Z)
 B.B2=new A.ku(0,"png")
 B.Be=new A.i3(B.B2,!1,0,"png")
@@ -70803,15 +70794,24 @@ B.Cg=A.a(s([66,77]),t.Z)
 B.B4=new A.ku(4,"bmp")
 B.B9=new A.i3(B.B4,!1,6,"bmp")
 B.AX=new A.j5(B.Cg,B.B9,5,"bmp")
-B.D9=A.a(s([B.B_,B.B0,B.AZ,B.AY,B.B1,B.AX]),A.as("y<j5>"))
+B.D8=A.a(s([B.B_,B.B0,B.AZ,B.AY,B.B1,B.AX]),A.as("y<j5>"))
 B.eC=A.a(s([0,0,24576,1023,65534,34815,65534,18431]),t.t)
-B.Da=A.a(s([-1,0,0,1,0,0,-1,0,1,0,0,0,-1,1,0,1,1,1,1,0]),t.n)
+B.D9=A.a(s([-1,0,0,1,0,0,-1,0,1,0,0,0,-1,1,0,1,1,1,1,0]),t.n)
 B.aW=new A.e_(1,"fuchsia")
 B.aX=new A.e_(3,"linux")
 B.aY=new A.e_(5,"windows")
-B.Db=A.a(s([B.aj,B.aW,B.ac,B.aX,B.aJ,B.aY]),A.as("y<e_>"))
+B.Da=A.a(s([B.aj,B.aW,B.ac,B.aX,B.aJ,B.aY]),A.as("y<e_>"))
 B.hp=A.a(s([!0,!1]),t.HZ)
 B.hq=A.a(s([0,0,65498,45055,65535,34815,65534,18431]),t.t)
+B.JX=new A.fl("Vi har reservert hotellrom p\xe5 ",null,B.aA,null)
+B.dL=new A.k(!0,null,null,null,null,null,null,B.bO,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
+B.JT=new A.fl("Quality Hotel Ramsalt",null,B.aA,B.dL)
+B.JS=new A.fl(" i Bod\xf8. Rommene er tilgjengelige for booking frem til og med ",null,B.aA,null)
+B.JU=new A.fl("09. juni 2025.\n\n",null,B.aA,B.dL)
+B.JV=new A.fl("Pris per natt (inkl. MVA):\n",null,B.aA,null)
+B.JR=new A.fl("\u2022 Enkeltrom: kr 1 190\n",null,B.aA,B.dL)
+B.JW=new A.fl("\u2022 Dobbeltrom: kr 1 390\n\n",null,B.aA,B.dL)
+B.Df=A.a(s([B.JX,B.JT,B.JS,B.JU,B.JV,B.JR,B.JW]),t.VO)
 B.Dg=A.a(s(["pointerdown","pointermove","pointerleave","pointerup","pointercancel","touchstart","touchend","touchmove","touchcancel","mousedown","mousemove","mouseleave","mouseup"]),t.s)
 B.Di=new A.mS(null)
 B.n=new A.vf(0,"ignored")
@@ -70885,7 +70885,7 @@ B.CJ=A.a(s([B.pK,null,null,B.bZ]),t.L)
 B.pL=new A.f(57)
 B.dq=new A.f(8589935161)
 B.CK=A.a(s([B.pL,null,null,B.dq]),t.L)
-B.Dc=A.a(s([B.dk,B.dk,B.eJ,null]),t.L)
+B.Db=A.a(s([B.dk,B.dk,B.eJ,null]),t.L)
 B.eF=new A.f(4294967555)
 B.CM=A.a(s([B.eF,null,B.eF,null]),t.L)
 B.b2=new A.f(4294968065)
@@ -70898,7 +70898,7 @@ B.b3=new A.f(4294968068)
 B.C5=A.a(s([B.b3,null,null,B.bZ]),t.L)
 B.hu=new A.f(4294968321)
 B.Cq=A.a(s([B.hu,null,null,B.hC]),t.L)
-B.Dd=A.a(s([B.dj,B.dj,B.eI,null]),t.L)
+B.Dc=A.a(s([B.dj,B.dj,B.eI,null]),t.L)
 B.Co=A.a(s([B.ag,null,null,B.bV]),t.L)
 B.bS=new A.f(4294968069)
 B.Ck=A.a(s([B.bS,null,null,B.dm]),t.L)
@@ -70909,13 +70909,13 @@ B.bT=new A.f(4294968070)
 B.Cl=A.a(s([B.bT,null,null,B.dp]),t.L)
 B.hv=new A.f(4294968327)
 B.Cr=A.a(s([B.hv,null,null,B.hB]),t.L)
-B.De=A.a(s([B.dl,B.dl,B.eK,null]),t.L)
+B.Dd=A.a(s([B.dl,B.dl,B.eK,null]),t.L)
 B.dh=new A.f(4294968071)
 B.Cm=A.a(s([B.dh,null,null,B.dn]),t.L)
 B.di=new A.f(4294968072)
 B.BJ=A.a(s([B.di,null,null,B.dq]),t.L)
-B.Df=A.a(s([B.bU,B.bU,B.cs,null]),t.L)
-B.EN=new A.cJ(["*",B.Cu,"+",B.Cv,"-",B.Cw,".",B.Cx,"/",B.Cy,"0",B.CN,"1",B.CO,"2",B.CP,"3",B.CQ,"4",B.CR,"5",B.CS,"6",B.CT,"7",B.CU,"8",B.CJ,"9",B.CK,"Alt",B.Dc,"AltGraph",B.CM,"ArrowDown",B.Ch,"ArrowLeft",B.Ci,"ArrowRight",B.Cj,"ArrowUp",B.C5,"Clear",B.Cq,"Control",B.Dd,"Delete",B.Co,"End",B.Ck,"Enter",B.Cf,"Home",B.Cl,"Insert",B.Cr,"Meta",B.De,"PageDown",B.Cm,"PageUp",B.BJ,"Shift",B.Df],A.as("cJ<r,E<f?>>"))
+B.De=A.a(s([B.bU,B.bU,B.cs,null]),t.L)
+B.EN=new A.cJ(["*",B.Cu,"+",B.Cv,"-",B.Cw,".",B.Cx,"/",B.Cy,"0",B.CN,"1",B.CO,"2",B.CP,"3",B.CQ,"4",B.CR,"5",B.CS,"6",B.CT,"7",B.CU,"8",B.CJ,"9",B.CK,"Alt",B.Db,"AltGraph",B.CM,"ArrowDown",B.Ch,"ArrowLeft",B.Ci,"ArrowRight",B.Cj,"ArrowUp",B.C5,"Clear",B.Cq,"Control",B.Dc,"Delete",B.Co,"End",B.Ck,"Enter",B.Cf,"Home",B.Cl,"Insert",B.Cr,"Meta",B.Dd,"PageDown",B.Cm,"PageUp",B.BJ,"Shift",B.De],A.as("cJ<r,E<f?>>"))
 B.BX=A.a(s([42,null,null,8589935146]),t.Z)
 B.BY=A.a(s([43,null,null,8589935147]),t.Z)
 B.C_=A.a(s([45,null,null,8589935149]),t.Z)
@@ -72751,7 +72751,7 @@ r($,"ayV","aqp",()=>A.ayu())
 r($,"aFM","aqO",()=>A.dn().gzz()+"roboto/v20/KFOmCnqEu92Fr1Me5WZLCzYlKw.ttf")
 r($,"aFc","aqn",()=>A.ayi(A.ani(A.ani(A.aBl(),"window"),"FinalizationRegistry"),A.bp(new A.ado())))
 r($,"aGl","ar8",()=>new A.a_X())
-s($,"aFi","aqr",()=>A.aut(B.Da))
+s($,"aFi","aqr",()=>A.aut(B.D9))
 s($,"aFh","aeP",()=>A.XE(A.asa($.aqr())))
 s($,"aF4","aqk",()=>A.alB(A.w(A.a6(),"ParagraphBuilder")))
 s($,"aGs","arb",()=>{var q=t.N,p=A.as("+breaks,graphemes,words(qt,qt,qt)"),o=A.afZ(1e5,q,p),n=A.afZ(1e4,q,p)
