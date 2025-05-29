@@ -206,7 +206,7 @@ class _InfoPageState extends State<InfoPage>
                           text:
                               ' i Bodø. Rommene er tilgjengelige for booking frem til og med '),
                       TextSpan(
-                        text: '27. mai 2025.\n\n',
+                        text: '09. juni 2025.\n\n',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextSpan(text: 'Pris per natt (inkl. MVA):\n'),
