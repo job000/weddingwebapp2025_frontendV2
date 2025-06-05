@@ -29,11 +29,11 @@ class _ProgramPageState extends State<ProgramPage>
   ];
 
   final _saturdayEvents = [
-    TimelineEvent('16:30', 'Ankomst og velkomstdrinker'),
+    TimelineEvent('16:30', 'Ankomst og velkomstdrinker.'),
     //TimelineEvent('19:30', 'Taler og underholdning'),
     //TimelineEvent('21:00', 'Kake og kaffe'),
     //TimelineEvent('22:00', 'Dans og fest'),
-    TimelineEvent('18:00', 'Mer informasjon kommer'),
+    TimelineEvent('18:00', 'Mer informasjon kommer.'),
   ];
 
   @override
