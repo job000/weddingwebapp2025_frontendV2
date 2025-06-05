@@ -217,15 +217,15 @@ class _HomePageState extends State<HomePage>
                     _buildAnimatedCard(
                       _cardAnimations[2],
                       'Sosial sammenkomst',
-                      '27. juni 2025, kl. 18:00',
-                      'Vi planlegger en sosial sammenkomst for de som ønsker. Mer informasjon om dette kommer.',
+                      '27. juni 2025, kl. 18:30',
+                      'Bli kjent kveld - Vi møtes på Fauna Sauna. Det blir badstu, bading og forfriskninger.',
                       Icons.people,
                     ),
                     const SizedBox(height: 24),
                     _buildAnimatedCard(
                       _cardAnimations[2],
                       'Bryllupsfest',
-                      '28. juni 2025, kl. 17:00',
+                      '28. juni 2025, kl. 16:30',
                       'Bestemorstua, Bodø',
                       Icons.celebration,
                     ),
